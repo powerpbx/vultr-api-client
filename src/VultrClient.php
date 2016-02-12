@@ -5,8 +5,7 @@
  *
  * NOTE: this client was forked from
  * https://github.com/usefulz/vultr-api-client and overhauled extensively to be
- * more open for extension and easily installable using
- * our beloved composer.
+ * more open for extension and easily installable using our beloved composer.
  *
  * @package Vultr
  * @version 1.0

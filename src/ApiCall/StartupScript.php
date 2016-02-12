@@ -1,0 +1,101 @@
+<?php
+
+namespace Vultr\ApiCall;
+
+class StartupScript extends AbstractApiCall
+{
+    /**
+     * List all startup scripts on the current account.
+     *
+     * 'boot' type scripts are executed by the server's operating system on the
+     * first boot. 'pxe' type scripts are executed by iPXE when the server
+     * itself starts up.
+     *
+     * @see https://www.vultr.com/api/#startupscript_startupscript_list
+     *
+     * @return array
+     */
+    public function getList()
+    {
+        return $this->adapter->get('startupscript/list');
+    }
+
+    /**
+     * Create a startup script.
+     *
+     * @see https://www.vultr.com/api/#startupscript_create
+     *
+     * @param string $name   Name of the newly created startup script
+     * @param string $script Startup script contents
+     * @param string $type   boot|pxe Type of startup script. Default is 'boot'.
+     *
+     * @return integer script ID
+     */
+    public function create($name, $script, $type = 'boot')
+    {
+        $allowed = ['boot', 'pxe'];
+
+        if (!in_array($type, $allowed)) {
+            throw new \Exception(
+                sprintf('Script type must be one of %s.', implode(' or ', $type))
+            );
+        }
+
+        $args = [
+            'name' => $name,
+            'script' => $script,
+            'type' => $type,
+        ];
+
+        $script = $this->adapter->post('startupscript/create', $args);
+
+        return (int) $script['SCRIPTID'];
+    }
+
+    /**
+     * Update an existing startup script.
+     *
+     * @param int $script_id SCRIPTID of script to update
+     * @param string $name   (optional) New name for the startup script
+     * @param string $script (optional) New startup script contents
+     *
+     * @return integer HTTP response code
+     **/
+     public function update($scriptId, $name = null, $script = null)
+     {
+        if ($name === null && $sshKey == null) {
+            throw new \Exception(
+                sprintf('Please provide name or key to update for key ID %s!', $keyId)
+            );
+        }
+
+        $args = ['SCRIPTID' => $scriptId];
+
+        if ($name !== null) {
+            $args['name'] = $name;
+        }
+
+        if ($script !== null) {
+            $args['script'] = $script;
+        }
+
+         return $this->adapter->post('startupscript/update', $args, true);
+     }
+
+    /**
+     * Remove a startup script.
+     *
+     * @see https://www.vultr.com/api/#startupscript_destroy
+     *
+     * @param integer $scriptId Unique identifier for this startup script. These
+     * can be found using the getList() call.
+     *
+     * @return integer HTTP respnose code
+     */
+    public function destroy($scriptId)
+    {
+        $args = ['SCRIPTID' => $scriptId];
+
+        return $this->adapter->post('startupscript/destroy', $args, true);
+    }
+}

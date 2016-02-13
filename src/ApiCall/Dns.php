@@ -20,7 +20,7 @@ class Dns extends AbstractApiCall
      * @see https://www.vultr.com/api/#dns_dns_list
      *
      * @return array
-     **/
+     */
     public function getList()
     {
         return $this->adapter->get('dns/list');
@@ -34,7 +34,7 @@ class Dns extends AbstractApiCall
      * @param string $domain Domain to list records for
      *
      * @return array
-     **/
+     */
     public function getRecords($domain)
     {
         $args = ['domain' => $domain];
@@ -52,7 +52,7 @@ class Dns extends AbstractApiCall
      * (A and MX)
      *
      * @return integer HTTP response code
-     **/
+     */
     public function createDomain($domain, $serverIp)
     {
         $args = [
@@ -71,7 +71,7 @@ class Dns extends AbstractApiCall
      * @param string $domain Domain name to delete
      *
      * @return integer HTTP response code
-     **/
+     */
     public function deleteDomain($domain)
     {
         $args = ['domain' => $domain];
@@ -84,16 +84,16 @@ class Dns extends AbstractApiCall
      *
      * @see https://www.vultr.com/api/#dns_create_record
      *
-     * @param string $domain Domain name to add record to
-     * @param string $name   string Name (subdomain) of record
-     * @param string $type   Type (A, AAAA, MX, etc) of record
-     * @param string $data   Data for this record
-     * @param integer $ttl   (optional) TTL of this record
+     * @param string  $domain   Domain name to add record to
+     * @param string  $name     string Name (subdomain) of record
+     * @param string  $type     Type (A, AAAA, MX, etc) of record
+     * @param string  $data     Data for this record
+     * @param integer $ttl      (optional) TTL of this record
      * @param integer $priority (only required for MX and SRV) Priority of this
      * record (omit the priority from the data)
      *
      * @return integer HTTP response code
-     **/
+     */
     public function createRecord($domain, $name, $type, $data, $ttl = null, $priority = null)
     {
         $args = [
@@ -128,7 +128,7 @@ class Dns extends AbstractApiCall
      * record (omit the priority from the data)
      *
      * @return integer HTTP response code
-     **/
+     */
     public function updateRecord($recordId, $domain, $name, $data, $ttl = null, $priority = null)
     {
         $args = [
@@ -158,7 +158,7 @@ class Dns extends AbstractApiCall
      * @param string $recordId ID of record to delete (see getRecords())
      *
      * @return integer HTTP response code
-     **/
+     */
     public function deleteRecord($domain, $recordId)
     {
         $args = [

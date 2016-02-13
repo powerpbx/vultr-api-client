@@ -12,7 +12,7 @@
 
 namespace Vultr\Cache;
 
-class CacheInterface
+interface CacheInterface
 {
     //...
 }

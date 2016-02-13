@@ -104,10 +104,10 @@ class CurlAdapter implements AdapterInterface
     /**
      * API Query Function
      *
-     * @param string $url
-     * @param array $args
-     * @param string $requestType POST|GET
-     * @param $getCode Whether or not to return the HTTP response code
+     * @param string  $url
+     * @param array   $args
+     * @param string  $requestType POST|GET
+     * @param boolean $getCode     whether or not to return the HTTP response code
      *
      * @return object
      */

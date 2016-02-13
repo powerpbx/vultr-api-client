@@ -75,7 +75,7 @@ class MetaData extends AbstractApiCall
      * @see https://www.vultr.com/api/#iso_iso_list
      *
      * @return mixed Available ISO images
-     **/
+     */
     public function getIsoList()
     {
         return $this->adapter->get('iso/list');

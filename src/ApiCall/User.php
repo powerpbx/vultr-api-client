@@ -83,7 +83,7 @@ class User extends AbstractApiCall
      * @return integer HTTP response code
      *
      * @throws \Exception
-     **/
+     */
     public function update($userId, $email = null, $name = null, $password = null, array $acls = [], $apiEnabled = null)
     {
         if ($email === null && $name === null && $password === null && empty($acls) && $apiEnabled === null) {

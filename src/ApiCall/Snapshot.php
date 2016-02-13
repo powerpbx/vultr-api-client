@@ -37,9 +37,9 @@ class Snapshot extends AbstractApiCall
      *
      * @see https://www.vultr.com/api/#snapshot_create
      *
-     * @param integer $serverId Identifier of the virtual machine to create a
+     * @param integer $serverId    Identifier of the virtual machine to create a
      * snapshot from
-     * @param string $description (optional) Description of snapshot contents
+     * @param string  $description (optional) Description of snapshot contents
      *
      * @return string snapshot ID
      */

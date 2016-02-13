@@ -23,7 +23,7 @@ class ReservedIp extends AbstractApiCall
      * @see https://www.vultr.com/api/#reservedip_ip_list
      *
      * @return array
-     **/
+     */
     public function getList()
     {
         return $this->adapter->get('reservedip/list');
@@ -36,11 +36,11 @@ class ReservedIp extends AbstractApiCall
      *
      * @param string  $ip       Reserved IP to attach to your account (use the
      * full subnet here)
-     * @param string  $serverId Unique indentifier of the server to attach the
+     * @param string  $serverId Unique identifier of the server to attach the
      * reserved IP to
      *
      * @return integer HTTP response code
-     **/
+     */
     public function attach($ip, $serverId)
     {
         $args = [
@@ -62,7 +62,7 @@ class ReservedIp extends AbstractApiCall
      * reserved IP from
      *
      * @return integer HTTP response code
-     **/
+     */
     public function detach($ip, $serverId)
     {
         $args = [
@@ -83,12 +83,12 @@ class ReservedIp extends AbstractApiCall
      *
      * @param integer  $datacenterId Location to create this reserved IP in.
      * See v1/regions/list
-     * @param string   $ipType 'v4' or 'v6' Type of reserved IP to create
+     * @param string   $ipType       'v4' or 'v6' Type of reserved IP to create
      *
      * @return integer reserved IP ID
      *
      * @throws \Exception
-     **/
+     */
     public function create($datacenterId, $ipType)
     {
         $allowed = ['v4', 'v6'];
@@ -120,7 +120,7 @@ class ReservedIp extends AbstractApiCall
      * These can be found using the getList() call.
      *
      * @return integer HTTP response code
-     **/
+     */
     public function destroy($reservedIpId)
     {
         $args = ['SUBID' => $reservedIpId];

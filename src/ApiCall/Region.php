@@ -42,7 +42,7 @@ class Region extends AbstractApiCall
      *
      * @see https://www.vultr.com/api/#regions_region_available
      *
-     * @param integer $datacenterid Location to check availability of
+     * @param integer $datacenterId Location to check availability of
      *
      * @return array List of VPSPLANIDs
      */

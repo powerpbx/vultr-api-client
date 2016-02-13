@@ -65,9 +65,9 @@ class SshKey extends AbstractApiCall
      *
      * @see https://www.vultr.com/api/#sshkey_update
      *
-     * @param string $keyId SSHKEYID of key to update
-     * @param string $name  (optional) New name for the SSH key
-     * @param string $key   (optional) New SSH key contents
+     * @param string $keyId  SSHKEYID of key to update
+     * @param string $name   (optional) New name for the SSH key
+     * @param string $sshKey (optional) New SSH key contents
      *
      * @return integer HTTP response code
      *

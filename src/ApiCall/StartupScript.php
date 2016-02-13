@@ -44,6 +44,8 @@ class StartupScript extends AbstractApiCall
      * @param string $type   boot|pxe Type of startup script. Default is 'boot'.
      *
      * @return integer script ID
+     *
+     * @throws \Exception
      */
     public function create($name, $script, $type = 'boot')
     {
@@ -69,17 +71,19 @@ class StartupScript extends AbstractApiCall
     /**
      * Update an existing startup script.
      *
-     * @param int $script_id SCRIPTID of script to update
-     * @param string $name   (optional) New name for the startup script
-     * @param string $script (optional) New startup script contents
+     * @param integer $scriptId SCRIPTID of script to update
+     * @param string  $name     (optional) New name for the startup script
+     * @param string  $script   (optional) New startup script contents
      *
      * @return integer HTTP response code
-     **/
+     *
+     * @throws \Exception
+     */
      public function update($scriptId, $name = null, $script = null)
      {
-        if ($name === null && $sshKey == null) {
+        if ($name === null && $script == null) {
             throw new \Exception(
-                sprintf('Please provide name or key to update for key ID %s!', $keyId)
+                sprintf('Please provide name or script to update for script ID %s!', $scriptId)
             );
         }
 
@@ -104,7 +108,7 @@ class StartupScript extends AbstractApiCall
      * @param integer $scriptId Unique identifier for this startup script. These
      * can be found using the getList() call.
      *
-     * @return integer HTTP respnose code
+     * @return integer HTTP response code
      */
     public function destroy($scriptId)
     {

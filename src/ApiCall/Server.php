@@ -27,9 +27,9 @@ class Server extends AbstractApiCall
      *
      * @param integer $serverId Unique identifier for this subscription. These
      * can be found using the getList() call.
-     * @param integer $appId Application to use. See getAppChangeList().
+     * @param integer $appId    Application to use. See getAppChangeList().
      *
-     * @return array
+     * @return integer HTTP response code
      */
     public function appChange($serverId, $appId)
     {
@@ -73,9 +73,9 @@ class Server extends AbstractApiCall
      *
      * @param integer $serverId Unique identifier for this subscription. These
      * can be found using the getList() call.
-     * @param integer $osId Operating system to use. See getOsChangeList().
+     * @param integer $osId     Operating system to use. See getOsChangeList().
      *
-     * @return array
+     * @return integer HTTP response code
      */
     public function osChange($serverId, $osId)
     {
@@ -115,9 +115,9 @@ class Server extends AbstractApiCall
      *
      * @param integer $serverId Unique identifier for this subscription. These
      * can be found using the getList() call.
-     * @param integer $planId The new plan. See getUpgradePlanList().
+     * @param integer $planId   The new plan. See getUpgradePlanList().
      *
-     * @return array
+     * @return integer HTTP response code
      */
     public function upgradePlan($serverId, $planId)
     {
@@ -192,8 +192,8 @@ class Server extends AbstractApiCall
      *
      * @see https://www.vultr.com/api/#server_get_user_data
      *
-     * @param integer $serverId Unique identifier for this subscription. These can
-     * be found using the getList() call.
+     * @param integer $serverId Unique identifier for this subscription. These
+     * can be found using the getList() call.
      *
      * @return array
      */
@@ -214,11 +214,11 @@ class Server extends AbstractApiCall
      *
      * @see https://www.vultr.com/api/#server_set_user_data
      *
-     * @param integer $serverId Unique identifier for this subscription. These can
-     * be found using the getList() call.
+     * @param integer $serverId Unique identifier for this subscription. These
+     * can be found using the getList() call.
      * @param string  $userData Cloud-init user-data
      *
-     * @return array
+     * @return integer HTTP response code
      */
     public function setUserData($serverId, $userData)
     {
@@ -236,8 +236,8 @@ class Server extends AbstractApiCall
      *
      * @see https://www.vultr.com/api/#server_neighbors
      *
-     * @param integer $serverId Unique identifier for this subscription. These can
-     * be found using the getList() call.
+     * @param integer $serverId Unique identifier for this subscription. These
+     * can be found using the getList() call.
      *
      * @return array
      */
@@ -253,8 +253,8 @@ class Server extends AbstractApiCall
      *
      * @see https://www.vultr.com/api/#server_bandwidth
      *
-     * @param integer $serverId Unique identifier for this subscription. These can
-     * be found using the getList() call.
+     * @param integer $serverId Unique identifier for this subscription. These
+     * can be found using the getList() call.
      *
      * @return array
      */
@@ -297,11 +297,11 @@ class Server extends AbstractApiCall
      *
      * @param integer $serverId Unique identifier for this subscription. These
      * can be found using the getList() call.
-     * @param string $reboot (optional, default 'yes') 'yes' or 'no'. If yes,
+     * @param string  $reboot   (optional, default 'yes') 'yes' or 'no'. If yes,
      * the server is rebooted immediately.
      *
      * @return integer HTTP response code
-     **/
+     */
     public function ipv4Create($serverId, $reboot = 'yes')
     {
         $args = [
@@ -322,10 +322,10 @@ class Server extends AbstractApiCall
      *
      * @param integer $serverId Unique identifier for this subscription. These
      * can be found using the getList() call.
-     * @param string $ip IPv4 address to remove.
+     * @param string  $ip       IPv4 address to remove.
      *
      * @return integer HTTP response code
-     **/
+     */
     public function destroyIpv4($serverId, $ip)
     {
         $args = [
@@ -333,7 +333,7 @@ class Server extends AbstractApiCall
             'ip' => $ip,
         ];
 
-      return $this->adapter->post('server/destroy_ipv4', $args, true);
+        return $this->adapter->post('server/destroy_ipv4', $args, true);
     }
 
     /**
@@ -345,9 +345,9 @@ class Server extends AbstractApiCall
      *
      * @param string $serverId Unique identifier for this subscription. These
      * can be found using the getList() call.
-     * @param string $ip IPv4 address used in the reverse DNS update. These can
-     * be found with the getIpv4List() call.
-     * @param string $rdns reverse DNS entry
+     * @param string $ip       IPv4 address used in the reverse DNS update.
+     * These can be found with the getIpv4List() call.
+     * @param string $rdns     reverse DNS entry
      *
      * @return integer HTTP response code
      */
@@ -372,8 +372,8 @@ class Server extends AbstractApiCall
      *
      * @param string $serverId Unique identifier for this subscription. These
      * can be found using the getList() call.
-     * @param string $ip IPv4 address used in the reverse DNS update. These can
-     * be found with the getIpv4List() call.
+     * @param string $ip       IPv4 address used in the reverse DNS update.
+     * These can be found with the getIpv4List() call.
      *
      * @return integer HTTP response code
      */
@@ -384,7 +384,7 @@ class Server extends AbstractApiCall
             'ip' => $ip,
         ];
 
-      return $this->adapter->post('server/reverse_default_ipv4', $args, true);
+        return $this->adapter->post('server/reverse_default_ipv4', $args, true);
     }
 
     /**
@@ -440,9 +440,9 @@ class Server extends AbstractApiCall
      *
      * @param string $serverId Unique identifier for this subscription. These
      * can be found using the getList() call.
-     * @param string $ip IPv6 address used in the reverse DNS update. These can
-     * be found with the getIpv6List() call.
-     * @param string $rdns reverse DNS entry
+     * @param string $ip       IPv6 address used in the reverse DNS update.
+     * These can be found with the getIpv6List() call.
+     * @param string $rdns     reverse DNS entry
      *
      * @return integer HTTP response code
      */
@@ -466,11 +466,11 @@ class Server extends AbstractApiCall
      *
      * @param string $serverId Unique identifier for this subscription. These
      * can be found using the getList() call.
-     * @param string $ip IPv6 address used in the reverse DNS update. These can
-     * be found with the getIpv6List() call.
+     * @param string $ip       IPv6 address used in the reverse DNS update.
+     * These can be found with the getIpv6List() call.
      *
      * @return integer HTTP response code
-     **/
+     */
     public function reverseDeleteIpv6($serverId, $ip)
     {
         $args = [
@@ -603,15 +603,15 @@ class Server extends AbstractApiCall
     }
 
     /**
-     * Restore the specificed snapshot to the virtual machine.
+     * Restore the specified snapshot to the virtual machine.
      *
      * Any data already on the virtual machine will be lost.
      *
      * @see https://www.vultr.com/api/#server_restore_snapshot
      *
-     * @param integer $serverId  Unique identifier for this subscription. These
+     * @param integer $serverId   Unique identifier for this subscription. These
      * can be found using the getList() call.
-     * @param string $snapshotId (see snapshot()->getList()) to restore to this
+     * @param string  $snapshotId (see snapshot()->getList()) to restore to this
      * instance
      *
      * @return integer HTTP response code
@@ -633,11 +633,11 @@ class Server extends AbstractApiCall
      *
      * @param integer $serverId Unique identifier for this subscription. These
      * can be found using the getList() call.
-     * @param string $backupId (see metaData()->getBackupList()) to restore to
+     * @param string  $backupId (see metaData()->getBackupList()) to restore to
      * this instance
      *
      * @return integer HTTP response code
-     **/
+     */
     public function restoreBackup($serverId, $backupId)
     {
         $args = [
@@ -686,7 +686,7 @@ class Server extends AbstractApiCall
      *           the control panel
      *     SSHKEYID string (optional) List of SSH keys to apply to this server
      *              on install (only valid for Linux/FreeBSD).  See
-     *              sshKey()->getList().  Seperate keys with commas
+     *              sshKey()->getList().  Separate keys with commas
      *     auto_backups string (optional) 'yes' or 'no'.  If yes, automatic
      *                  backups will be enabled for this server (these have an
      *                  extra charge associated with them)
@@ -709,7 +709,7 @@ class Server extends AbstractApiCall
         $planId   = (int) $config['VPSPLANID'];
 
         try {
-            $available = $this->isAvailable($regionId, $planId);
+            $this->isAvailable($regionId, $planId);
         } catch (\Exception $e) {
             return false;
         }
@@ -723,7 +723,7 @@ class Server extends AbstractApiCall
      * Determine server availability for a given region and plan.
      *
      * @param integer $regionId Datacenter ID
-     * @param integer $planId VPS Plan ID
+     * @param integer $planId   VPS Plan ID
      *
      * @return bool
      *

@@ -27,7 +27,7 @@ class FileCache implements CacheInterface
     /**
      * Cache ttl for all get requests
      *
-     * @var int TTL in seconds
+     * @var integer TTL in seconds
      */
     private $cacheTtl;
 
@@ -39,7 +39,10 @@ class FileCache implements CacheInterface
         $this->cacheTtl = $cacheTtl;
     }
 
-
+    /**
+     * @param $url
+     * @return bool|mixed
+     */
     protected function serveFromCache($url)
     {
         // Garbage collect 5% of the time
@@ -66,6 +69,10 @@ class FileCache implements CacheInterface
         return false;
     }
 
+    /**
+     * @param $url
+     * @param $json
+     */
     protected function saveToCache($url, $json)
     {
         if (!file_exists(self::CACHEDIR)) {
@@ -78,14 +85,22 @@ class FileCache implements CacheInterface
         file_put_contents($file, $json);
     }
 
+    /**
+     * @param $url
+     * @return string
+     */
     protected function groupFromUrl($url)
     {
-        $group = 'default';
         if (preg_match('@/v1/([^/]+)/@', $url, $match)) {
             return $match[1];
         }
+
+        return 'default';
     }
 
+    /**
+     * @param $url
+     */
     protected function purgeCache($url)
     {
         $group = $this->groupFromUrl($url);
@@ -95,6 +110,9 @@ class FileCache implements CacheInterface
         }
     }
 
+    /**
+     * Write last access.
+     */
     protected function writeLast()
     {
         if (!file_exists(self::CACHEDIR)) {
@@ -104,10 +122,15 @@ class FileCache implements CacheInterface
         file_put_contents(self::CACHEDIR . '/last', time());
     }
 
+    /**
+     * @return string
+     */
     protected function readLast()
     {
         if (file_exists(self::CACHEDIR . '/last')) {
             return file_get_contents(self::CACHEDIR . '/last');
         }
+
+        return 0;
     }
 }

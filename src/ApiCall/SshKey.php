@@ -71,7 +71,7 @@ class SshKey extends AbstractApiCall
      *
      * @return integer HTTP response code
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function update($keyId, $name = null, $sshKey = null)
     {

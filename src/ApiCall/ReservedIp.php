@@ -87,7 +87,7 @@ class ReservedIp extends AbstractApiCall
      *
      * @return integer reserved IP ID
      *
-     * @throws Exception
+     * @throws \Exception
      **/
     public function create($datacenterId, $ipType)
     {

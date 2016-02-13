@@ -74,4 +74,4 @@ implement the actual calls.
 The original version of this API is done by [usefulz](https://github.com/usefulz/vultr-api-client).
 This version has been forked by [integr.io](http://integr.io/) for use in one of
 our Symfony applications.
-It has been reworked with extensability and ease of use in mind.
+It has been reworked with extensibility and ease of use in mind.

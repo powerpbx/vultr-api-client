@@ -31,34 +31,35 @@ class GuzzleHttpAdapter implements AdapterInterface
      */
     protected $response;
 
+
     /**
-     * @param string $apiToken
+     * @param string $apiToken Vultr API token
      */
     public function __construct($apiToken)
     {
-        $config = [];
-
         if (version_compare(ClientInterface::VERSION, '6') === 1) {
-            $config = $this->guzzle6Config($apiToken);
+            $version = 6;
         } else if (version_compare(ClientInterface::VERSION, '5') === 1) {
-            $config = $this->guzzle5Config($apiToken);
+            $version = 5;
         } else {
             throw new \RuntimeException('Unsupported guzzle version! Install guzzle 5 or 6.');
         }
 
-        $this->client = new Client($config);
+        $this->client = new Client(
+            $this->guzzleConfig($apiToken, $version)
+        );
     }
 
     /**
-     * Helper function to return Guzzle 5 config.
+     * Helper function to return Guzzle config.
      *
-     * @param  string $apiToken
+     * @param string  $apiToken Vultr API token
+     * @param integer $version Guzzle version
      * @return array
      */
-    protected function guzzle6Config($apiToken)
+    protected function guzzleConfig($apiToken, $version)
     {
-        return [
-            'base_uri' => VultrClient::ENDPOINT,
+        $config = [
             'headers' => [
                 'Accept' => 'application/json',
                 'User-Agent' => sprintf('%s v%s (%s)',
@@ -71,32 +72,20 @@ class GuzzleHttpAdapter implements AdapterInterface
                 'api_key' => $apiToken,
             ],
         ];
-    }
 
-    /**
-     * Helper function to return Guzzle 5 config.
-     *
-     * @param  string $apiToken
-     * @return array
-     */
-    protected function guzzle5Config($apiToken)
-    {
-        return [
-            'base_url' => VultrClient::ENDPOINT,
-            'defaults' => [
-                'headers' => [
-                    'Accept' => 'application/json',
-                    'User-Agent' => sprintf('%s v%s (%s)',
-                        VultrClient::AGENT,
-                        VultrClient::VERSION,
-                        'https://github.com/malc0mn/vultr-api-client'
-                    ),
-                ],
-                'query' => [
-                    'api_key' => $apiToken,
-                ],
-            ],
-        ];
+        switch ($version) {
+            case 5:
+                $config = [
+                    'base_url' => VultrClient::ENDPOINT,
+                    'defaults' => $config,
+                ];
+                break;
+            case 6:
+                $config['base_uri'] = VultrClient::ENDPOINT;
+                break;
+        }
+
+        return $config;
     }
 
     /**

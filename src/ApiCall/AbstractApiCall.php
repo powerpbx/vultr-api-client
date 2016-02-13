@@ -6,10 +6,6 @@ use Vultr\Adapter\AdapterInterface;
 
 abstract class AbstractApiCall
 {
-    const ENDPOINT = 'https://api.vultr.com/v1/';
-    const VERSION  = '1.0';
-    const AGENT    = 'Vultr.com PHP API Client';
-
     /**
      * @var AdapterInterface
      */

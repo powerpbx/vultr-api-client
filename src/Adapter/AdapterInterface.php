@@ -12,48 +12,24 @@
 
 namespace Vultr\Adapter;
 
-class AdapterInterface
+interface AdapterInterface
 {
-    /**
-     * API Token
-     *
-     * @see https://my.vultr.com/settings/
-     *
-     * @var string $api_token Vultr.com API token
-     */
-    private $apiToken;
-
-
-    /**
-     * The API responsecode
-     *
-     * @var int
-     */
-    private $responseCode;
-
-    /**
-     * Constructor.
-     *
-     * @param string $apiToken
-     */
-    public function __construct($apiToken);
-
     /**
      * GET Method
      *
-     * @param string $method
-     * @param mixed $args
+     * @param string $url  API method to call
+     * @param array  $args Argument to pas along with the method call.
      *
      * @return mixed
      */
-    public function get($method, $args = false);
+    public function get($url, array $args = []);
 
     /**
      * POST Method
      *
-     * @param string $method
-     * @param mixed $args
+     * @param string  $url     API method to call
+     * @param array   $args    Argument to pas along with the method call.
      * @param boolean $getCode whether or not to return the HTTP response code.
      */
-    public function post($method, $args, $getCode = false);
+    public function post($url, array $args, $getCode = false);
 }

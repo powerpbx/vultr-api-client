@@ -2,7 +2,7 @@
 
 namespace Vultr\ApiCall;
 
-class Snapshot extends AbstractApiCall
+class MetaData extends AbstractApiCall
 {
     /**
      * Retrieve information about the current account

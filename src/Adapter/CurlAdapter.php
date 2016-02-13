@@ -15,35 +15,43 @@
 
 namespace Vultr\Adapter;
 
-use Vultr\ApiCall\AbstractApiCall;
+use Vultr\VultrClient;
 use Vultr\Cache\CacheInterface;
 
 class CurlAdapter implements AdapterInterface
 {
     /**
-     * {@inheritdoc}
+     * API Token
+     *
+     * @see https://my.vultr.com/settings/
+     *
+     * @var string $api_token Vultr.com API token
      */
-    private $apiToken;
+    protected $apiToken;
 
     /**
-     * {@inheritdoc}
+     * The API responsecode
+     *
+     * @var integer
      */
-    private $responseCode;
+    protected $responseCode;
 
     /**
      * Debug Variable
      *
      * @var bool Debug API requests
      */
-    private $debug;
+    protected $debug;
 
     /**
      * @var CacheInterface
      */
-    private $cache;
+    protected $cache;
 
     /**
-     * {@inheritdoc}
+     * Constructor.
+     *
+     * @param string $apiToken
      */
     public function __construct($apiToken, CacheInterface $cache = null)
     {
@@ -72,7 +80,7 @@ class CurlAdapter implements AdapterInterface
      *
      * @return boolean
      */
-    private function hasCache()
+    protected function hasCache()
     {
         return is_object($this->cache);
     }
@@ -80,38 +88,39 @@ class CurlAdapter implements AdapterInterface
     /**
      * {@inheritdoc}
      */
-    public function get($method, $args = false)
+    public function get($url, array $args = [])
     {
-        return $this->query($method, $args, 'GET');
+        return $this->query($url, $args, 'GET');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function post($method, $args, $getCode = false)
+    public function post($url, array $args, $getCode = false)
     {
-        return $this->query($method, $args, 'POST', $getCode);
+        return $this->query($url, $args, 'POST', $getCode);
     }
 
     /**
      * API Query Function
      *
-     * @param string $method
-     * @param mixed $args
+     * @param string $url
+     * @param array $args
      * @param string $requestType POST|GET
+     * @param $getCode Whether or not to return the HTTP response code
      *
      * @return object
      */
-    private function query($method, $args, $requestType, $getCode = false)
+    protected function query($url, array $args, $requestType, $getCode = false)
     {
-        $url = AbstractApiCall::ENDPOINT . $method . '?api_key=' . $this->apiToken;
+        $url = VultrClient::ENDPOINT . $url . '?api_key=' . $this->apiToken;
 
         if ($this->debug) {
             print($requestType . ' ' . $url . PHP_EOL);
         }
 
         $defaults = [
-            CURLOPT_USERAGENT => sprintf('%s v%s (%s)', AbstractApiCall::AGENT, AbstractApiCall::VERSION, 'https://github.com/usefulz/vultr-api-client'),
+            CURLOPT_USERAGENT => sprintf('%s v%s (%s)', VultrClient::AGENT, VultrClient::VERSION, 'https://github.com/usefulz/vultr-api-client'),
             CURLOPT_HEADER => 0,
             CURLOPT_VERBOSE => 0,
             CURLOPT_SSL_VERIFYPEER => 0,
@@ -168,7 +177,7 @@ class CurlAdapter implements AdapterInterface
         // If so, then error out, otherwise, keep going.
         try {
             $this->isAPIError($apisess, $response, $getCode);
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             curl_close($apisess);
             return $e->getMessage();
         }
@@ -194,7 +203,7 @@ class CurlAdapter implements AdapterInterface
         return $obj;
     }
 
-    private function isAPIError($responseObj, $response, $getCode)
+    protected function isAPIError($responseObj, $response, $getCode)
     {
         $code = curl_getinfo($responseObj, CURLINFO_HTTP_CODE);
 
@@ -207,24 +216,24 @@ class CurlAdapter implements AdapterInterface
 
         switch($code) {
             case 400:
-                throw new Exception('Invalid API location. Check the URL that you are using.');
+                throw new \Exception('Invalid API location. Check the URL that you are using.');
                 break;
             case 403:
-                throw new Exception('Invalid or missing API key. Check that your API key is present and matches your assigned key.');
+                throw new \Exception('Invalid or missing API key. Check that your API key is present and matches your assigned key.');
                 break;
             case 405:
-                throw new Exception('Invalid HTTP method. Check that the method (POST|GET) matches what the documentation indicates.');
+                throw new \Exception('Invalid HTTP method. Check that the method (POST|GET) matches what the documentation indicates.');
                 break;
             case 500:
-                throw new Exception('Internal server error. Try again at a later time.');
+                throw new \Exception('Internal server error. Try again at a later time.');
                 break;
             case 412:
-                throw new Exception(
+                throw new \Exception(
                     sprintf('Request failed: %s', $response)
                 );
                 break;
             case 503:
-                throw new Exception('Rate limit hit. API requests are limited to an average of 2/s. Try your request again later.');
+                throw new \Exception('Rate limit hit. API requests are limited to an average of 2/s. Try your request again later.');
                 break;
         }
     }

@@ -35,9 +35,9 @@ class Region extends AbstractApiCall
     public function getAvailability($datacenterId)
     {
         $args = [
-            'DCID' => (int) $datacenterId;
+            'DCID' => (int) $datacenterId,
         ];
 
-        return $this->adapter->get('regions/availability');
+        return $this->adapter->get('regions/availability', $args);
     }
 }

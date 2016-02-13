@@ -32,6 +32,9 @@ or [Guzzle 6](https://github.com/guzzle/guzzle).
 ```php
 require 'vendor/autoload.php';
 
+Use Vultr\VultrClient;
+Use Vultr\Adapter\GuzzleHttpAdapter;
+
 // Using Guzzle 5 or 6...
 $client = new VultrClient(
     new GuzzleHttpAdapter('your-api-key')
@@ -46,6 +49,9 @@ var_export($result);
 
 ```php
 require 'vendor/autoload.php';
+
+Use Vultr\VultrClient;
+Use Vultr\Adapter\CurlAdapter;
 
 // Using regular CURL, courtesy of 'usefulz'
 $client = new VultrClient(

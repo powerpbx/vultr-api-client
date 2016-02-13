@@ -16,7 +16,7 @@ class ReservedIp extends AbstractApiCall
      **/
     public function getList()
     {
-        return $this->adapter->post('reservedip/list', $args);
+        return $this->adapter->get('reservedip/list');
     }
 
     /**

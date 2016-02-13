@@ -122,7 +122,6 @@ class GuzzleHttpAdapter implements AdapterInterface
             if ($getCode) {
                 return (int) $this->response->getStatusCode();
             }
-
         } catch (RequestException $e) {
             $this->response = $e->getResponse();
             $this->handleError();
@@ -136,10 +135,8 @@ class GuzzleHttpAdapter implements AdapterInterface
      */
     protected function handleError()
     {
-        $body = (string) $this->response->getBody();
         $code = (int) $this->response->getStatusCode();
-
-        $content = json_decode($body);
+        $content = json_decode($this->response->getBody());
 
         throw new \Exception(isset($content->message) ? $content->message : 'Unable to process request.', $code);
     }

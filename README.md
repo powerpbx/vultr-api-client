@@ -23,9 +23,11 @@ or edit composer.json and add:
 ```
 
 If you want to use the `GuzzleHttpAdapter`, you will need to add [Guzzle 5](https://github.com/guzzle/guzzle/tree/5.3)
-[Guzzle 6](https://github.com/guzzle/guzzle).
+or [Guzzle 6](https://github.com/guzzle/guzzle).
 
 ## Usage examples
+
+###### Guzzle
 
 ```php
 require 'vendor/autoload.php';
@@ -39,6 +41,8 @@ $result = $client->metaData()->getAccountInfo();
 
 var_export($result);
 ```
+
+###### CURL
 
 ```php
 require 'vendor/autoload.php';

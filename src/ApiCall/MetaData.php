@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * Vultr.com Curl Adapter
+ *
+ * NOTE: part of this code was extracted from
+ * https://github.com/usefulz/vultr-api-client, updated for PSR compliance and
+ * extended with new API calls.
+ *
+ * @package Vultr
+ * @version 1.0
+ * @author  https://github.com/malc0mn - https://github.com/usefulz
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ * @see     https://github.com/malc0mn/vultr-api-client
+ */
+
 namespace Vultr\ApiCall;
 
 class MetaData extends AbstractApiCall

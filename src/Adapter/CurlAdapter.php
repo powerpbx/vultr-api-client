@@ -190,7 +190,7 @@ class CurlAdapter implements AdapterInterface
         }
 
         // Return the decoded JSON response.
-        $obj = json_decode($response, true);
+        $array = json_decode($response, true);
 
         if ($this->hasCache()) {
             if ($cacheable) {
@@ -200,7 +200,7 @@ class CurlAdapter implements AdapterInterface
             }
         }
 
-        return $obj;
+        return $array;
     }
 
     protected function isAPIError($responseObj, $response, $getCode)

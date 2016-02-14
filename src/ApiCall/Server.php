@@ -194,6 +194,17 @@ class Server extends AbstractApiCall
     }
 
     /**
+     * Wrapper function around getList() to get the details for one server.
+     *
+     * @param integer $serverId Unique identifier of a subscription.
+     *
+     * @return array
+     */
+    public function getDetail($serverId) {
+        return $this->getList($serverId);
+    }
+
+    /**
      * Retrieves the (base64 encoded) user-data for this subscription.
      *
      * @see https://www.vultr.com/api/#server_get_user_data

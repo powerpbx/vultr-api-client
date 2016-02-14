@@ -184,7 +184,13 @@ class Server extends AbstractApiCall
             $args['tag'] = $tag;
         }
 
-        return $this->adapter->get('server/list', $args);
+        $servers = $this->adapter->get('server/list', $args);
+
+        if ($subscriptionId !== null) {
+            return isset($servers[$subscriptionId])? $servers[$subscriptionId] : false;
+        }
+
+        return $servers;
     }
 
     /**

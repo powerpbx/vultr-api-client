@@ -81,7 +81,7 @@ class StartupScript extends AbstractApiCall
      */
      public function update($scriptId, $name = null, $script = null)
      {
-        if ($name === null && $script == null) {
+        if ($name === null && $script === null) {
             throw new \Exception(
                 sprintf('Please provide name or script to update for script ID %s!', $scriptId)
             );

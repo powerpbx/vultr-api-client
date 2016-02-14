@@ -75,7 +75,7 @@ class SshKey extends AbstractApiCall
      */
     public function update($keyId, $name = null, $sshKey = null)
     {
-        if ($name === null && $sshKey == null) {
+        if ($name === null && $sshKey === null) {
             throw new \Exception(
                 sprintf('Please provide name or key to update for key ID %s!', $keyId)
             );

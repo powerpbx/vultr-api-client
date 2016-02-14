@@ -163,7 +163,7 @@ class CurlAdapter implements AdapterInterface
 
         // To avoid rate limit hits.
         if ($this->hasCache() && $this->cache->readLast() == time()) {
-            sleep(1);
+            usleep(500000);
         }
 
         $apisess = curl_init();

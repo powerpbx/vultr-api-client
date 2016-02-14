@@ -106,7 +106,7 @@ class GuzzleHttpAdapter implements AdapterInterface
             $this->handleError();
         }
 
-        return json_decode($this->response->getBody());
+        return json_decode($this->response->getBody(), true);
     }
 
     /**
@@ -127,7 +127,7 @@ class GuzzleHttpAdapter implements AdapterInterface
             $this->handleError();
         }
 
-        return json_decode($this->response->getBody());
+        return json_decode($this->response->getBody(), true);
     }
 
     /**

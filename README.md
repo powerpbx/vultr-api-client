@@ -5,6 +5,7 @@ PHP API Client for api.vultr.com
 [![Total Downloads](https://poser.pugx.org/malc0mn/vultr-api-client/downloads)](https://packagist.org/packages/malc0mn/vultr-api-client)
 [![Latest Unstable Version](https://poser.pugx.org/malc0mn/vultr-api-client/v/unstable)](https://packagist.org/packages/malc0mn/vultr-api-client)
 [![License](https://poser.pugx.org/malc0mn/vultr-api-client/license)](https://packagist.org/packages/malc0mn/vultr-api-client)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/24e6faf8-0baa-4bf8-a921-77b24e84faa3/mini.png)](https://insight.sensiolabs.com/projects/24e6faf8-0baa-4bf8-a921-77b24e84faa3)
 
 **Consider this to be a beta release that will become final in the next few
 days! Not all calls have been properly tested!**

@@ -95,7 +95,7 @@ class ReservedIp extends AbstractApiCall
 
         if (!in_array($ipType, $allowed)) {
             throw new \Exception(
-                sprintf('IP type must be one of %s.', implode(' or ', $ipType))
+                sprintf('IP type must be one of %s.', implode(' or ', $allowed))
             );
         }
 

@@ -55,7 +55,7 @@ class StartupScriptTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              Vultr\Exception\ApiException
+     * @expectedException              \Vultr\Exception\ApiException
      * @expectedExceptionMessageRegExp #Script type must be one of .*.#
      */
     public function testCreateException()
@@ -78,7 +78,7 @@ class StartupScriptTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              Vultr\Exception\ApiException
+     * @expectedException              \Vultr\Exception\ApiException
      * @expectedExceptionMessageRegExp #Please provide name or script to update for script ID .*!#
      */
     public function testUpdateException()

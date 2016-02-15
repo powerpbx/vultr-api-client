@@ -69,7 +69,7 @@ class ReservedIpTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              Vultr\Exception\ApiException
+     * @expectedException              \Vultr\Exception\ApiException
      * @expectedExceptionMessageRegExp #IP type must be one of .*\.#
      */
     public function testCreateException()

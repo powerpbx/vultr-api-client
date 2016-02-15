@@ -62,7 +62,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        Vultr\Exception\ApiException
+     * @expectedException        \Vultr\Exception\ApiException
      * @expectedExceptionMessage Please provide at least one parameter to update!
      */
     public function testUpdateException()

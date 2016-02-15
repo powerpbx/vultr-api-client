@@ -20,7 +20,7 @@ class VultrClientTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \PHPUnit_Framework_Error
      */
-    public function testConstructException()
+    /*public function testConstructException()
     {
         $this->jsonData = new JsonData();
 
@@ -28,5 +28,5 @@ class VultrClientTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->client = new VultrClient($mockAdapter);
-    }
+    }*/
 }

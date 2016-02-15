@@ -112,7 +112,7 @@ class User extends AbstractApiCall
             $args['api_enabled'] = $apiEnabled;
         }
 
-        return $this->adapter->post('user/update', $args);
+        return $this->adapter->post('user/update', $args, true);
     }
 
     /**

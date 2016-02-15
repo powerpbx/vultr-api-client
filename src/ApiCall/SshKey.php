@@ -87,7 +87,7 @@ class SshKey extends AbstractApiCall
             $args['name'] = $name;
         }
 
-        if ($sshKeys !== null) {
+        if ($sshKey !== null) {
             $args['ssh_key'] = $sshKey;
         }
 

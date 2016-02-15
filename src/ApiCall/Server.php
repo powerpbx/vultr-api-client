@@ -321,7 +321,7 @@ class Server extends AbstractApiCall
      *
      * @return integer HTTP response code
      */
-    public function ipv4Create($serverId, $reboot = 'yes')
+    public function createIpv4($serverId, $reboot = 'yes')
     {
         $args = [
             'SUBID' => (int) $serverId,

@@ -165,4 +165,117 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInternalType('int', $result);
     }
+
+    public function testReverseDefaultIpv4()
+    {
+        $result = $this->client->server()->reverseDefaultIpv4(576965, '127.0.0.1', 'rdns');
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testGetIpv6List()
+    {
+        $result = $this->client->server()->getIpv6List(576965);
+
+        $this->assertArrayHasKey('network_size', array_shift($result));
+    }
+
+    public function testGetReverseIpv6List()
+    {
+        $result = $this->client->server()->getReverseIpv6List(576965);
+
+        $this->assertArrayHasKey('reverse', array_shift($result));
+    }
+
+    public function testReverseSetIpv6()
+    {
+        $result = $this->client->server()->reverseSetIpv6(576965, '2001:DB8:1000::100', 'rdns');
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testReverseDeleteIpv6()
+    {
+        $result = $this->client->server()->reverseDeleteIpv6(576965, '2001:DB8:1000::100');
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testReboot()
+    {
+        $result = $this->client->server()->reboot(576965);
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testHalt()
+    {
+        $result = $this->client->server()->halt(576965);
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testStart()
+    {
+        $result = $this->client->server()->start(576965);
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testDestroy()
+    {
+        $result = $this->client->server()->destroy(576965);
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testReinstall()
+    {
+        $result = $this->client->server()->reinstall(576965);
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testSetLabel()
+    {
+        $result = $this->client->server()->setLabel(576965, 'name');
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testRestoreSnapshot()
+    {
+        $result = $this->client->server()->restoreSnapshot(576965, '544e52f31c706');
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testRestoreBackup()
+    {
+        $result = $this->client->server()->restoreBackup(576965, '543d34149403a');
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testCreate()
+    {
+        $result = $this->client->server()->create([
+            'DCID'=> 5,
+            'VPSPLANID' => 40,
+            'OSID' => 148,
+        ]);
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testCreateUnavailable()
+    {
+        $result = $this->client->server()->create([
+            'DCID'=> 5,
+            'VPSPLANID' => 1,
+            'OSID' => 148,
+        ]);
+
+        $this->assertFalse($result);
+    }
 }

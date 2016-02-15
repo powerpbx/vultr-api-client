@@ -53,7 +53,7 @@ class StartupScript extends AbstractApiCall
 
         if (!in_array($type, $allowed)) {
             throw new \Exception(
-                sprintf('Script type must be one of %s.', implode(' or ', $type))
+                sprintf('Script type must be one of %s.', implode(' or ', $allowed))
             );
         }
 

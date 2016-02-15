@@ -1,6 +1,7 @@
 PHP API Client for api.vultr.com
 ================================
 
+[![Build Status](https://travis-ci.org/malc0mn/vultr-api-client.svg?branch=master)](https://travis-ci.org/malc0mn/vultr-api-client)
 [![Latest Stable Version](https://poser.pugx.org/malc0mn/vultr-api-client/v/stable)](https://packagist.org/packages/malc0mn/vultr-api-client)
 [![Total Downloads](https://poser.pugx.org/malc0mn/vultr-api-client/downloads)](https://packagist.org/packages/malc0mn/vultr-api-client)
 [![Latest Unstable Version](https://poser.pugx.org/malc0mn/vultr-api-client/v/unstable)](https://packagist.org/packages/malc0mn/vultr-api-client)

@@ -5,7 +5,7 @@ namespace Vultr\Tests;
 use Vultr\Tests\JsonData;
 use Vultr\VultrClient;
 
-class ReservedIpTest extends \PHPUnit_Framework_TestCase
+class UserTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var VultrClient
@@ -42,44 +42,37 @@ class ReservedIpTest extends \PHPUnit_Framework_TestCase
 
     public function testGetList()
     {
-        $result = $this->client->reservedIp()->getList();
+        $result = $this->client->user()->getList();
 
-        $this->assertArrayHasKey('subnet', array_shift($result));
-    }
-
-    public function testAttach()
-    {
-        $result = $this->client->reservedIp()->attach('127.0.0.1', 1255);
-
-        $this->assertInternalType('int', $result);
-    }
-
-    public function testDetach()
-    {
-        $result = $this->client->reservedIp()->detach('127.0.0.1', 1255);
-
-        $this->assertInternalType('int', $result);
+        $this->assertArrayHasKey('USERID', $result[0]);
     }
 
     public function testCreate()
     {
-        $result = $this->client->reservedIp()->create(1, 'v6');
+        $result = $this->client->user()->create('try.to@guess.it', 'jules', 'somepass', []);
+
+        $this->assertArrayHasKey('USERID', $result);
+    }
+
+    public function testUpdate()
+    {
+        $result = $this->client->user()->update(6, 'try.to@guess.it');
 
         $this->assertInternalType('int', $result);
     }
 
     /**
-     * @expectedException              \Exception
-     * @expectedExceptionMessageRegExp #IP type must be one of .*\.#
+     * @expectedException        Vultr\Exception\ApiException
+     * @expectedExceptionMessage Please provide at least one parameter to update!
      */
-    public function testCreateException()
+    public function testUpdateException()
     {
-        $this->client->reservedIp()->create(1, 'v42');
+        $this->client->user()->update('564a1a7794d83');
     }
 
-    public function testDestroy()
+    public function testDelete()
     {
-        $result = $this->client->reservedIp()->destroy(1);
+        $result = $this->client->user()->delete('564a1a7794d83');
 
         $this->assertInternalType('int', $result);
     }

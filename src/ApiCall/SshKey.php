@@ -16,6 +16,8 @@
 
 namespace Vultr\ApiCall;
 
+use Vultr\Exception\ApiException;
+
 class SshKey extends AbstractApiCall
 {
     /**
@@ -71,12 +73,12 @@ class SshKey extends AbstractApiCall
      *
      * @return integer HTTP response code
      *
-     * @throws \Exception
+     * @throws ApiException
      */
     public function update($keyId, $name = null, $sshKey = null)
     {
         if ($name === null && $sshKey === null) {
-            throw new \Exception(
+            throw new ApiException(
                 sprintf('Please provide name or key to update for key ID %s!', $keyId)
             );
         }

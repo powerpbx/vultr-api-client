@@ -5,7 +5,7 @@ namespace Vultr\Tests;
 use Vultr\Tests\JsonData;
 use Vultr\VultrClient;
 
-class UserTest extends \PHPUnit_Framework_TestCase
+class ReservedIpTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var VultrClient
@@ -42,37 +42,44 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     public function testGetList()
     {
-        $result = $this->client->user()->getList();
+        $result = $this->client->reservedIp()->getList();
 
-        $this->assertArrayHasKey('USERID', $result[0]);
+        $this->assertArrayHasKey('subnet', array_shift($result));
+    }
+
+    public function testAttach()
+    {
+        $result = $this->client->reservedIp()->attach('127.0.0.1', 1255);
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testDetach()
+    {
+        $result = $this->client->reservedIp()->detach('127.0.0.1', 1255);
+
+        $this->assertInternalType('int', $result);
     }
 
     public function testCreate()
     {
-        $result = $this->client->user()->create('try.to@guess.it', 'jules', 'somepass', []);
-
-        $this->assertArrayHasKey('USERID', $result);
-    }
-
-    public function testUpdate()
-    {
-        $result = $this->client->user()->update(6, 'try.to@guess.it');
+        $result = $this->client->reservedIp()->create(1, 'v6');
 
         $this->assertInternalType('int', $result);
     }
 
     /**
-     * @expectedException        \Exception
-     * @expectedExceptionMessage Please provide at least one parameter to update!
+     * @expectedException              Vultr\Exception\ApiException
+     * @expectedExceptionMessageRegExp #IP type must be one of .*\.#
      */
-    public function testUpdateException()
+    public function testCreateException()
     {
-        $this->client->user()->update('564a1a7794d83');
+        $this->client->reservedIp()->create(1, 'v42');
     }
 
-    public function testDelete()
+    public function testDestroy()
     {
-        $result = $this->client->user()->delete('564a1a7794d83');
+        $result = $this->client->reservedIp()->destroy(1);
 
         $this->assertInternalType('int', $result);
     }

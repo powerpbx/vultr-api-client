@@ -12,6 +12,8 @@
 
 namespace Vultr\ApiCall;
 
+use Vultr\Exception\ApiException;
+
 class ReservedIp extends AbstractApiCall
 {
     /**
@@ -87,14 +89,14 @@ class ReservedIp extends AbstractApiCall
      *
      * @return integer reserved IP ID
      *
-     * @throws \Exception
+     * @throws ApiException
      */
     public function create($datacenterId, $ipType)
     {
         $allowed = ['v4', 'v6'];
 
         if (!in_array($ipType, $allowed)) {
-            throw new \Exception(
+            throw new ApiException(
                 sprintf('IP type must be one of %s.', implode(' or ', $allowed))
             );
         }

@@ -12,6 +12,8 @@
 
 namespace Vultr\ApiCall;
 
+use Vultr\Exception\ApiException;
+
 class User extends AbstractApiCall
 {
     /**
@@ -82,12 +84,12 @@ class User extends AbstractApiCall
      *
      * @return integer HTTP response code
      *
-     * @throws \Exception
+     * @throws ApiException
      */
     public function update($userId, $email = null, $name = null, $password = null, array $acls = [], $apiEnabled = null)
     {
         if ($email === null && $name === null && $password === null && empty($acls) && $apiEnabled === null) {
-            throw new \Exception('Please provide at least one parameter to update!');
+            throw new ApiException('Please provide at least one parameter to update!');
         }
 
         $args = ['USERID' => $userId];

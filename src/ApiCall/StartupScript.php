@@ -16,6 +16,8 @@
 
 namespace Vultr\ApiCall;
 
+use Vultr\Exception\ApiException;
+
 class StartupScript extends AbstractApiCall
 {
     /**
@@ -45,14 +47,14 @@ class StartupScript extends AbstractApiCall
      *
      * @return integer script ID
      *
-     * @throws \Exception
+     * @throws ApiException
      */
     public function create($name, $script, $type = 'boot')
     {
         $allowed = ['boot', 'pxe'];
 
         if (!in_array($type, $allowed)) {
-            throw new \Exception(
+            throw new ApiException(
                 sprintf('Script type must be one of %s.', implode(' or ', $allowed))
             );
         }
@@ -77,12 +79,12 @@ class StartupScript extends AbstractApiCall
      *
      * @return integer HTTP response code
      *
-     * @throws \Exception
+     * @throws ApiException
      */
      public function update($scriptId, $name = null, $script = null)
      {
         if ($name === null && $script === null) {
-            throw new \Exception(
+            throw new ApiException(
                 sprintf('Please provide name or script to update for script ID %s!', $scriptId)
             );
         }

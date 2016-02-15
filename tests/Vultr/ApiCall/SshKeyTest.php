@@ -69,7 +69,7 @@ class SshKeyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException              \Exception
+     * @expectedException              Vultr\Exception\ApiException
      * @expectedExceptionMessageRegExp #Please provide name or key to update for key ID .*!#
      */
     public function testUpdateException()

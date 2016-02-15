@@ -16,6 +16,8 @@
 
 namespace Vultr\ApiCall;
 
+use Vultr\Exception\ApiException;
+
 class Server extends AbstractApiCall
 {
     /**
@@ -744,7 +746,7 @@ class Server extends AbstractApiCall
      *
      * @return bool
      *
-     * @throws \Exception if VPS Plan ID is not available in specified region
+     * @throws ApiException if VPS Plan ID is not available in specified region
      */
     public function isAvailable($regionId, $planId)
     {
@@ -752,7 +754,7 @@ class Server extends AbstractApiCall
 
         $availability = $region->getAvailability((int) $regionId);
         if (!in_array((int) $planId, $availability)) {
-            throw new \Exception(
+            throw new ApiException(
                 sprintf('Plan ID %d is not available in region %d.', $planId, $regionId)
             );
         } else {

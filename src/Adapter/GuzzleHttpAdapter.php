@@ -17,9 +17,10 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Message\ResponseInterface;
 use GuzzleHttp\Psr7\Response;
+use Vultr\Exception\ApiException;
 use Vultr\VultrClient;
 
-class GuzzleHttpAdapter implements AdapterInterface
+class GuzzleHttpAdapter extends AbstractAdapter
 {
     /**
      * @var ClientInterface
@@ -103,7 +104,7 @@ class GuzzleHttpAdapter implements AdapterInterface
             $this->response = $this->client->get($url, $options);
         } catch (RequestException $e) {
             $this->response = $e->getResponse();
-            $this->handleError();
+            return $this->handleError();
         }
 
         return json_decode($this->response->getBody(), true);
@@ -124,20 +125,29 @@ class GuzzleHttpAdapter implements AdapterInterface
             }
         } catch (RequestException $e) {
             $this->response = $e->getResponse();
-            $this->handleError();
+            return $this->handleError($getCode);
         }
 
         return json_decode($this->response->getBody(), true);
     }
 
     /**
-     * @throws \Exception
+     * @throws ApiException
      */
-    protected function handleError()
+    protected function handleError($getCode = false)
     {
         $code = (int) $this->response->getStatusCode();
+
+        if ($getCode) {
+            return $code;
+        }
+
         $content = json_decode($this->response->getBody());
 
-        throw new \Exception(isset($content->message) ? $content->message : 'Unable to process request.', $code);
+        try{
+            $this->reportError($code, $content);
+        } catch (ApiException $e) {
+            return $e->getMessage();
+        }
     }
 }

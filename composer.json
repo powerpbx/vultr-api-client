@@ -19,7 +19,7 @@
     },
     "require-dev": {
         "guzzlehttp/guzzle": ">=5.0 || <=6.0",
-        "phpunit/phpunit": "^4.0"
+        "phpunit/phpunit": ">=4.8"
     },
     "suggest": {
         "guzzlehttp/guzzle": "To use GuzzleHttpAdapter, require guzzlehttp/guzzle:^5.0|^6.0"

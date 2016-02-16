@@ -110,6 +110,13 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertArraySubset(['SUBID' => 576965], $result);
     }
 
+    public function testGetByTag()
+    {
+        $result = $this->client->server()->getByTag('mytag');
+
+        $this->assertArraySubset(['SUBID' => 576965], array_shift($result));
+    }
+
     public function testGetUserData()
     {
         $result = $this->client->server()->getUserData(576965);

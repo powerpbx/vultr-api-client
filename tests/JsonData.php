@@ -477,6 +477,17 @@ class JsonData
             return 200;
         }
 
-        return json_decode($this->response[$url], true);
+        $response = json_decode($this->response[$url], true);
+
+        // Handle server/list call with argument SUBID.
+        switch ($url) {
+            case 'server/list':
+                if (isset($args['SUBID'])) {
+                    $response = $response['576965'];
+                }
+                break;
+        }
+
+        return $response;
     }
 }

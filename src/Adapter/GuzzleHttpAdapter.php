@@ -130,7 +130,7 @@ class GuzzleHttpAdapter extends AbstractAdapter
         }
 
         // $response->json() is not compatible with Guzzle 6.
-        return json_decode($this->response->getBody());
+        return json_decode($this->response->getBody(), true);
     }
 
     /**
@@ -152,7 +152,7 @@ class GuzzleHttpAdapter extends AbstractAdapter
         }
 
         // $response->json() is not compatible with Guzzle 6.
-        return json_decode($this->response->getBody());
+        return json_decode($this->response->getBody(), true);
     }
 
     /**

@@ -107,7 +107,7 @@ class GuzzleHttpAdapter extends AbstractAdapter
             return $this->handleError();
         }
 
-        return json_decode($this->response->getBody(), true);
+        return $this->response->json();
     }
 
     /**
@@ -115,7 +115,7 @@ class GuzzleHttpAdapter extends AbstractAdapter
      */
     public function post($url, array $args, $getCode = false)
     {
-        $options['json'] = $args;
+        $options['body'] = $args;
 
         try {
             $this->response = $this->client->post($url, $options);
@@ -128,7 +128,7 @@ class GuzzleHttpAdapter extends AbstractAdapter
             return $this->handleError($getCode);
         }
 
-        return json_decode($this->response->getBody(), true);
+        return $this->response->json();
     }
 
     /**

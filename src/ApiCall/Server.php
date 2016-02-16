@@ -188,22 +188,32 @@ class Server extends AbstractApiCall
 
         $servers = $this->adapter->get('server/list', $args);
 
-        if ($subscriptionId !== null) {
-            return isset($servers[$subscriptionId])? $servers[$subscriptionId] : false;
-        }
-
         return $servers;
     }
 
     /**
      * Wrapper function around getList() to get the details for one server.
      *
-     * @param integer $serverId Unique identifier of a subscription.
+     * @param integer $serverId Unique identifier of a subscription. Only the
+     * subscription object will be returned.
      *
      * @return array
      */
     public function getDetail($serverId) {
         return $this->getList($serverId);
+    }
+
+
+    /**
+     * Wrapper function around getList() to get the details for one server.
+     *
+     * @param string $tag A tag string. Only subscription objects with this tag
+     * will be returned.
+     *
+     * @return array
+     */
+    public function getByTag($tag) {
+        return $this->getList(null, $tag);
     }
 
     /**

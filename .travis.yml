@@ -16,3 +16,8 @@ matrix:
 before_script:
   - composer self-update
   - composer install
+
+script:
+  - php -S localhost:8000 -t tests/ &
+  - phpunit
+  - ADAPTER=GuzzleHttpAdapter phpunit

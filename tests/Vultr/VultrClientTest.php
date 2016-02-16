@@ -8,11 +8,12 @@ class VultrClientTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstruct()
     {
-        $mockAdapter = $stub = $this->getMockBuilder('Vultr\Adapter\CurlAdapter')
-            ->setConstructorArgs(['EXAMPLE'])
-            ->getMock();
+        $adapterClass = 'Vultr\Adapter\\' . getenv('ADAPTER');
 
-        $client = new VultrClient($mockAdapter);
+        $adapter = new $adapterClass(getenv('APITOKEN'));
+        $adapter->setEndpoint(getenv('ENDPOINT'));
+
+        $client = new VultrClient($adapter);
 
         $this->assertInstanceOf('Vultr\VultrClient', $client);
     }

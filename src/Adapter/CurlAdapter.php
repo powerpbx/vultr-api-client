@@ -22,6 +22,11 @@ use Vultr\Cache\CacheInterface;
 class CurlAdapter extends AbstractAdapter
 {
     /**
+     * @var string API endpoint
+     */
+    protected $endpoint;
+
+    /**
      * API Token
      *
      * @see https://my.vultr.com/settings/
@@ -60,6 +65,8 @@ class CurlAdapter extends AbstractAdapter
         $this->responseCode = 0;
         $this->debug = false;
         $this->cache = $cache;
+
+        $this->endpoint = VultrClient::ENDPOINT;
     }
 
     /**
@@ -74,6 +81,15 @@ class CurlAdapter extends AbstractAdapter
         $this->debug = $debug;
 
         return $this;
+    }
+
+    /**
+     * Added primarily to allow proper code testing.
+     *
+     * @param string $endpoint
+     */
+    public function setEndpoint($endpoint) {
+        $this->endpoint = $endpoint;
     }
 
     /**
@@ -114,7 +130,7 @@ class CurlAdapter extends AbstractAdapter
      */
     protected function query($url, array $args, $requestType, $getCode = false)
     {
-        $url = VultrClient::ENDPOINT . $url . '?api_key=' . $this->apiToken;
+        $url = $this->endpoint . $url . '?api_key=' . $this->apiToken;
 
         if ($this->debug) {
             print($requestType . ' ' . $url . PHP_EOL);
@@ -177,7 +193,7 @@ class CurlAdapter extends AbstractAdapter
         // Check to see if there were any API exceptions thrown.
         // If so, then error out, otherwise, keep going.
         $this->isAPIError($apisess, $response, $getCode);
-        // The call above also closes the CURL session!
+        // The call above also closes the curl
 
         if ($getCode) {
             return (int) $this->responseCode;

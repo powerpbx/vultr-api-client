@@ -23,6 +23,15 @@ use Vultr\VultrClient;
 class GuzzleHttpAdapter extends AbstractAdapter
 {
     /**
+     * API Token
+     *
+     * @see https://my.vultr.com/settings/
+     *
+     * @var string $api_token Vultr.com API token
+     */
+    protected $apiToken;
+
+    /**
      * @var ClientInterface
      */
     protected $client;
@@ -59,19 +68,24 @@ class GuzzleHttpAdapter extends AbstractAdapter
             throw new \RuntimeException('Unsupported guzzle version! Install guzzle 5 or 6.');
         }
 
-        $this->client = new Client(
-            $this->guzzleConfig($apiToken)
-        );
+        $this->apiToken = $apiToken;
+        $this->buildClient();
     }
 
     /**
-     * Helper function to return Guzzle config.
+     * Helper function to build the Guzzle HTTP client.
      *
-     * @param string  $apiToken Vultr API token
+     * @param string $apiToken Vultr API token
+     * @param string $endpoint API endpoint
+     *
      * @return array
      */
-    protected function guzzleConfig($apiToken)
+    protected function buildClient($endpoint = null)
     {
+        if ($endpoint === null) {
+            $endpoint = VultrClient::ENDPOINT;
+        }
+
         $config = [
             'headers' => [
                 'Accept' => 'application/json',
@@ -82,23 +96,31 @@ class GuzzleHttpAdapter extends AbstractAdapter
                 ),
             ],
             'query' => [
-                'api_key' => $apiToken,
+                'api_key' => $this->apiToken,
             ],
         ];
 
         switch ($this->guzzleVersion) {
             case 5:
                 $config = [
-                    'base_url' => VultrClient::ENDPOINT,
+                    'base_url' => $endpoint,
                     'defaults' => $config,
                 ];
                 break;
             case 6:
-                $config['base_uri'] = VultrClient::ENDPOINT;
+                $config['base_uri'] = $endpoint;
                 break;
         }
 
-        return $config;
+        $this->client = new Client($config);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEndpoint($endpoint)
+    {
+        $this->buildClient($endpoint);
     }
 
     /**

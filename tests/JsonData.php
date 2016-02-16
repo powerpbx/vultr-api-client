@@ -467,25 +467,24 @@ class JsonData
      * Will mimic the behavior of get and post calls of the real Vultr API.
      *
      * @param string $url
-     * @param array $args
-     * @param boolean $getCode
      *
      * @return string
      */
-    public function getResponse($url, array $args, $getCode = false) {
-        if ($getCode) {
-            return 200;
-        }
-
-        $response = json_decode($this->response[$url], true);
+    public function getResponse($url, array $args) {
+        $response = '{}';
 
         // Handle server/list call with argument SUBID.
         switch ($url) {
             case 'server/list':
                 if (isset($args['SUBID'])) {
-                    $response = $response[$args['SUBID']];
+                    $response = json_decode($this->response[$url], true);
+                    $response = json_encode($response[$args['SUBID']]);
                 }
                 break;
+        }
+
+        if ($response === '{}' && isset($this->response[$url])) {
+            $response = $this->response[$url];
         }
 
         return $response;

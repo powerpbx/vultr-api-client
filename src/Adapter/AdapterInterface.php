@@ -35,4 +35,11 @@ interface AdapterInterface
      * be returned, otherwise an array of results will be returned.
      */
     public function post($url, array $args, $getCode = false);
+
+    /**
+     * Added primarily to allow proper code testing.
+     *
+     * @param string $endpoint
+     */
+    public function setEndpoint($endpoint);
 }

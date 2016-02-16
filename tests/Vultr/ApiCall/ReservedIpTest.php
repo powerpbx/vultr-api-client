@@ -2,7 +2,7 @@
 
 namespace Vultr\Tests;
 
-use Vultr\Tests\JsonData;
+use Vultr\Adapter\CurlAdapter;
 use Vultr\VultrClient;
 
 class ReservedIpTest extends \PHPUnit_Framework_TestCase
@@ -19,25 +19,12 @@ class ReservedIpTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->jsonData = new JsonData();
+        $adapterClass = 'Vultr\Adapter\\' . getenv('ADAPTER');
 
-        $mockAdapter = $stub = $this->getMockBuilder('Vultr\Adapter\CurlAdapter')
-            ->setConstructorArgs(['EXAMPLE'])
-            ->getMock();
+        $adapter = new $adapterClass(getenv('APITOKEN'));
+        $adapter->setEndpoint(getenv('ENDPOINT'));
 
-        $mockAdapter->method('get')
-            ->will(
-                $this->returnCallback([$this->jsonData, 'getResponse'])
-            )
-        ;
-
-        $mockAdapter->method('post')
-            ->will(
-                $this->returnCallback([$this->jsonData, 'getResponse'])
-            )
-        ;
-
-        $this->client = new VultrClient($mockAdapter);
+        $this->client = new VultrClient($adapter);
     }
 
     public function testGetList()

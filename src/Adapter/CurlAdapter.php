@@ -176,15 +176,8 @@ class CurlAdapter extends AbstractAdapter
 
         // Check to see if there were any API exceptions thrown.
         // If so, then error out, otherwise, keep going.
-        try {
-            $this->isAPIError($apisess, $response, $getCode);
-        } catch(ApiException $e) {
-            curl_close($apisess);
-            return $e->getMessage();
-        }
-
-        // Close our session.
-        curl_close($apisess);
+        $this->isAPIError($apisess, $response, $getCode);
+        // The call above also closes the CURL session!
 
         if ($getCode) {
             return (int) $this->responseCode;
@@ -214,6 +207,7 @@ class CurlAdapter extends AbstractAdapter
     protected function isAPIError($responseObj, $response, $getCode)
     {
         $code = curl_getinfo($responseObj, CURLINFO_HTTP_CODE);
+        curl_close($responseObj);
 
         if ($getCode) {
             $this->responseCode = $code;

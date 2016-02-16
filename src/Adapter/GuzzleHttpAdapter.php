@@ -142,12 +142,8 @@ class GuzzleHttpAdapter extends AbstractAdapter
             return $code;
         }
 
-        $content = json_decode($this->response->getBody());
+        $content = (string) $this->response->getBody();
 
-        try{
-            $this->reportError($code, $content);
-        } catch (ApiException $e) {
-            return $e->getMessage();
-        }
+        $this->reportError($code, $content);
     }
 }

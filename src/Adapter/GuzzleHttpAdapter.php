@@ -32,16 +32,24 @@ class GuzzleHttpAdapter extends AbstractAdapter
      */
     protected $response;
 
+    /**
+     * @var string
+     */
+    protected $postOptions;
 
     /**
      * @param string $apiToken Vultr API token
+     *
+     * @throws \RuntimeException
      */
     public function __construct($apiToken)
     {
         if (version_compare(ClientInterface::VERSION, '6') === 1) {
             $version = 6;
+            $this->postOptions = 'form_params';
         } else if (version_compare(ClientInterface::VERSION, '5') === 1) {
             $version = 5;
+            $this->postOptions = 'body';
         } else {
             throw new \RuntimeException('Unsupported guzzle version! Install guzzle 5 or 6.');
         }
@@ -115,7 +123,7 @@ class GuzzleHttpAdapter extends AbstractAdapter
      */
     public function post($url, array $args, $getCode = false)
     {
-        $options['body'] = $args;
+        $options[$this->postOptions] = $args;
 
         try {
             $this->response = $this->client->post($url, $options);

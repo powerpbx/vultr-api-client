@@ -21,6 +21,10 @@ class CurlAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Vultr\Adapter\CurlAdapter', $this->client);
     }
 
+    /**
+     * @expectedException        \Vultr\Exception\ApiException
+     * @expectedExceptionMessage Invalid or missing API key. Check that your API key is present and matches your assigned key.
+     */
     public function testGet()
     {
         $result = $this->client->get('account/info');
@@ -31,6 +35,10 @@ class CurlAdapterTest extends \PHPUnit_Framework_TestCase
         sleep(1);
     }
 
+    /**
+     * @expectedException        \Vultr\Exception\ApiException
+     * @expectedExceptionMessage Invalid or missing API key. Check that your API key is present and matches your assigned key.
+     */
     public function testPost()
     {
         $result = $this->client->post('user/create', []);
@@ -41,6 +49,10 @@ class CurlAdapterTest extends \PHPUnit_Framework_TestCase
         sleep(1);
     }
 
+    /**
+     * @expectedException        \Vultr\Exception\ApiException
+     * @expectedExceptionMessage Invalid HTTP method. Check that the method (POST|GET) matches what the documentation indicates.
+     */
     public function testWrongPost()
     {
         $result = $this->client->post('account/info', []);
@@ -51,6 +63,10 @@ class CurlAdapterTest extends \PHPUnit_Framework_TestCase
         sleep(1);
     }
 
+    /**
+     * @expectedException        \Vultr\Exception\ApiException
+     * @expectedExceptionMessage Invalid API location. Check the URL that you are using.
+     */
     public function testInvalidUrl()
     {
         $result = $this->client->post('unknown/url', []);

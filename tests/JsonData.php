@@ -483,7 +483,7 @@ class JsonData
         switch ($url) {
             case 'server/list':
                 if (isset($args['SUBID'])) {
-                    $response = $response['576965'];
+                    $response = $response[$args['SUBID']];
                 }
                 break;
         }

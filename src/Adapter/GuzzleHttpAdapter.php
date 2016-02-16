@@ -38,6 +38,11 @@ class GuzzleHttpAdapter extends AbstractAdapter
     protected $postOptions;
 
     /**
+     * @var integer
+     */
+    protected $guzzleVersion;
+
+    /**
      * @param string $apiToken Vultr API token
      *
      * @throws \RuntimeException
@@ -45,17 +50,17 @@ class GuzzleHttpAdapter extends AbstractAdapter
     public function __construct($apiToken)
     {
         if (version_compare(ClientInterface::VERSION, '6') === 1) {
-            $version = 6;
+            $this->guzzleVersion = 6;
             $this->postOptions = 'form_params';
         } else if (version_compare(ClientInterface::VERSION, '5') === 1) {
-            $version = 5;
+            $this->guzzleVersion = 5;
             $this->postOptions = 'body';
         } else {
             throw new \RuntimeException('Unsupported guzzle version! Install guzzle 5 or 6.');
         }
 
         $this->client = new Client(
-            $this->guzzleConfig($apiToken, $version)
+            $this->guzzleConfig($apiToken)
         );
     }
 
@@ -63,10 +68,9 @@ class GuzzleHttpAdapter extends AbstractAdapter
      * Helper function to return Guzzle config.
      *
      * @param string  $apiToken Vultr API token
-     * @param integer $version Guzzle version
      * @return array
      */
-    protected function guzzleConfig($apiToken, $version)
+    protected function guzzleConfig($apiToken)
     {
         $config = [
             'headers' => [
@@ -82,7 +86,7 @@ class GuzzleHttpAdapter extends AbstractAdapter
             ],
         ];
 
-        switch ($version) {
+        switch ($this->guzzleVersion) {
             case 5:
                 $config = [
                     'base_url' => VultrClient::ENDPOINT,
@@ -104,8 +108,18 @@ class GuzzleHttpAdapter extends AbstractAdapter
     {
         $options = [];
 
+        // Add additional arguments to the defaults:
+        //   Guzzle 6 does no longer merge the default query params with the
+        //   additional params given here!
         if (!empty($args)) {
-            $options['query'] = $args;
+            if ($this->guzzleVersion > 5) {
+                $options['query'] = array_merge(
+                    $this->client->getConfig('query'),
+                    $args
+                );
+            } else {
+                $options['query'] = $args;
+            }
         }
 
         try {

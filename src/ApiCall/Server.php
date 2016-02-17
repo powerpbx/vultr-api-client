@@ -732,10 +732,17 @@ class Server extends AbstractApiCall
      * @return mixed int|boolean Server ID if creation is successful, false
      * otherwise
      */
-    public function create($config)
+    public function create(array $config)
     {
         $regionId = (int) $config['DCID'];
         $planId   = (int) $config['VPSPLANID'];
+
+        if (isset($config['userdata'])) {
+            // Assume no base64 encoding has been applied when decoding fails!
+            if (base64_decode($config['userdata'], true) === FALSE) {
+                $config['userdata'] = base64_encode($config['userdata']);
+            }
+        }
 
         try {
             $this->isAvailable($regionId, $planId);

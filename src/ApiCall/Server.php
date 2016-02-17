@@ -380,7 +380,7 @@ class Server extends AbstractApiCall
      *
      * @return integer HTTP response code
      */
-    public function reverseSetIpv4($serverId, $ip, $rdns)
+    public function setReverseIpv4($serverId, $ip, $rdns)
     {
         $args = [
             'SUBID' => (int) $serverId,
@@ -406,7 +406,7 @@ class Server extends AbstractApiCall
      *
      * @return integer HTTP response code
      */
-    public function reverseDefaultIpv4($serverId, $ip)
+    public function restoreDefaultReverseIpv4($serverId, $ip)
     {
         $args = [
             'SUBID' => (int) $serverId,
@@ -475,7 +475,7 @@ class Server extends AbstractApiCall
      *
      * @return integer HTTP response code
      */
-    public function reverseSetIpv6($serverId, $ip, $rdns)
+    public function setReverseIpv6($serverId, $ip, $rdns)
     {
         $args = [
             'SUBID' => (int) $serverId,
@@ -500,7 +500,7 @@ class Server extends AbstractApiCall
      *
      * @return integer HTTP response code
      */
-    public function reverseDeleteIpv6($serverId, $ip)
+    public function deleteReverseIpv6($serverId, $ip)
     {
         $args = [
             'SUBID' => (int) $serverId,

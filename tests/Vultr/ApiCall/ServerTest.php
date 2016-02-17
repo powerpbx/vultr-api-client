@@ -139,7 +139,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('ip', array_shift($result));
     }
 
-    public function testIpv4Create()
+    public function testCreateIpv4()
     {
         $result = $this->client->server()->createIpv4(576965);
 
@@ -153,16 +153,16 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('int', $result);
     }
 
-    public function testReverseSetIpv4()
+    public function testSetReverseIpv4()
     {
-        $result = $this->client->server()->reverseSetIpv4(576965, '127.0.0.1', 'rdns');
+        $result = $this->client->server()->setReverseIpv4(576965, '127.0.0.1', 'rdns');
 
         $this->assertInternalType('int', $result);
     }
 
-    public function testReverseDefaultIpv4()
+    public function testRestoreDefaultReverseIpv4()
     {
-        $result = $this->client->server()->reverseDefaultIpv4(576965, '127.0.0.1', 'rdns');
+        $result = $this->client->server()->restoreDefaultReverseIpv4(576965, '127.0.0.1');
 
         $this->assertInternalType('int', $result);
     }
@@ -181,16 +181,16 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('reverse', array_shift($result));
     }
 
-    public function testReverseSetIpv6()
+    public function testSetReverseIpv6()
     {
-        $result = $this->client->server()->reverseSetIpv6(576965, '2001:DB8:1000::100', 'rdns');
+        $result = $this->client->server()->setReverseIpv6(576965, '2001:DB8:1000::100', 'rdns');
 
         $this->assertInternalType('int', $result);
     }
 
-    public function testReverseDeleteIpv6()
+    public function testDeleteReverseIpv6()
     {
-        $result = $this->client->server()->reverseDeleteIpv6(576965, '2001:DB8:1000::100');
+        $result = $this->client->server()->deleteReverseIpv6(576965, '2001:DB8:1000::100');
 
         $this->assertInternalType('int', $result);
     }

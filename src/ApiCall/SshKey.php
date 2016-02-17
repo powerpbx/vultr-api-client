@@ -113,6 +113,6 @@ class SshKey extends AbstractApiCall
     {
         $args = ['SSHKEYID' => $keyId];
 
-        return $this->adapter->post('sshkey/update', $args, true);
+        return $this->adapter->post('sshkey/destroy', $args, true);
     }
 }

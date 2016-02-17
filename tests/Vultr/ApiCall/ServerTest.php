@@ -261,14 +261,16 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('int', $result);
     }
 
+    /**
+     * @expectedException              \Vultr\Exception\ApiException
+     * @expectedExceptionMessageRegExp #Plan ID \d+ is not available in region \d+\.#
+     */
     public function testCreateUnavailable()
     {
-        $result = $this->client->server()->create([
+        $this->client->server()->create([
             'DCID'=> 5,
             'VPSPLANID' => 1,
             'OSID' => 148,
         ]);
-
-        $this->assertFalse($result);
     }
 }

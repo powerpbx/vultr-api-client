@@ -744,11 +744,7 @@ class Server extends AbstractApiCall
             }
         }
 
-        try {
-            $this->isAvailable($regionId, $planId);
-        } catch (\Exception $e) {
-            return false;
-        }
+        $this->isAvailable($regionId, $planId);
 
         $server = $this->adapter->post('server/create', $config);
 

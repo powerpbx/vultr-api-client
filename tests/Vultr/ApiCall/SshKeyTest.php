@@ -2,7 +2,6 @@
 
 namespace Vultr\Tests;
 
-use Vultr\Adapter\CurlAdapter;
 use Vultr\VultrClient;
 
 class SshKeyTest extends \PHPUnit_Framework_TestCase

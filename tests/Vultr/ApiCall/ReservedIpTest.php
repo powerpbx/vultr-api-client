@@ -2,7 +2,6 @@
 
 namespace Vultr\Tests;
 
-use Vultr\Adapter\CurlAdapter;
 use Vultr\VultrClient;
 
 class ReservedIpTest extends \PHPUnit_Framework_TestCase

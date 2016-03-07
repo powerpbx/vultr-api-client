@@ -24,7 +24,7 @@ or edit composer.json and add:
 ```json
 {
     "require": {
-        "malc0mn/vultr-api-client": "dev-master"
+        "malc0mn/vultr-api-client": "~1.0"
     }
 }
 ```

@@ -728,6 +728,9 @@ class Server extends AbstractApiCall
      *     ddos_protection (optional, default 'no') 'yes' or 'no'.  If yes, DDOS
      *                     protection will be enabled on the subscription (there
      *                     is an additional charge for this)
+     *     reserved_ip_v4 string (optional) IP address of the floating IP to use
+     *                    as the main IP of this server
+     *     hostname string (optional) The hostname to assign to this server.
      *
      * @return mixed int|boolean Server ID if creation is successful, false
      * otherwise

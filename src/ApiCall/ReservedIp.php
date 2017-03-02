@@ -86,12 +86,13 @@ class ReservedIp extends AbstractApiCall
      * @param integer  $datacenterId Location to create this reserved IP in.
      * See v1/regions/list
      * @param string   $ipType       'v4' or 'v6' Type of reserved IP to create
+     * @param string   $label        (optional) Label for this reserved IP
      *
      * @return integer reserved IP ID
      *
      * @throws ApiException
      */
-    public function create($datacenterId, $ipType)
+    public function create($datacenterId, $ipType, $label = null)
     {
         $allowed = ['v4', 'v6'];
 
@@ -106,6 +107,10 @@ class ReservedIp extends AbstractApiCall
             'ip_type' => $ipType,
         ];
 
+        if ($label !== null) {
+            $args['label'] = $label;
+        }
+
         $reservedIp = $this->adapter->post('reservedip/create', $args);
 
         return (int) $reservedIp['SUBID'];
@@ -114,11 +119,11 @@ class ReservedIp extends AbstractApiCall
     /**
      * Remove a reserved IP from your account.
      *
-     * You cannot get the IP address back after this.
+     * After making this call, you will not be able to recover the IP address.
      *
      * @see https://www.vultr.com/api/#reservedip_destroy
      *
-     * @param integer $reservedIpId Unique identifier for this subscription.
+     * @param integer $reservedIpId Unique identifier for this reserved IP.
      * These can be found using the getList() call.
      *
      * @return integer HTTP response code
@@ -128,5 +133,36 @@ class ReservedIp extends AbstractApiCall
         $args = ['SUBID' => $reservedIpId];
 
         return $this->adapter->post('reservedip/destroy', $args, true);
+    }
+
+    /**
+     * Convert an existing IP on a subscription to a reserved IP.
+     *
+     * Returns the SUBID of the newly created reserved IP.
+     *
+     * @see https://www.vultr.com/api/#reservedip_convert
+     *
+     * @param integer $serverId SUBID of the server that currently has the IP
+     * address you want to convert
+     * @param string  $ip       IP address you want to convert (v4 must be a
+     * /32, v6 must be a /64)
+     * @param string $label     (optional) Label for this reserved IP
+     *
+     * @return integer reserved IP ID
+     */
+    public function convert($serverId, $ip, $label = null)
+    {
+        $args = [
+            'SUBID' => $serverId,
+            'ip_address' => $ip,
+        ];
+
+        if ($label !== null) {
+            $args['label'] = $label;
+        }
+
+        $reservedIp = $this->adapter->post('reservedip/convert', $args);
+
+        return (int) $reservedIp['SUBID'];
     }
 }

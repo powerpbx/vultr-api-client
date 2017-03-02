@@ -69,4 +69,11 @@ class ReservedIpTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInternalType('int', $result);
     }
+
+    public function testConvert()
+    {
+        $result = $this->client->reservedIp()->convert(1, '127.0.0.1', 'test');
+
+        $this->assertInternalType('int', $result);
+    }
 }

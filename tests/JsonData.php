@@ -493,6 +493,34 @@ class JsonData
             }
         }',
 
+        'block/list' => '[
+            {
+                "SUBID": 1313216,
+                "date_created": "2016-03-29 10:10:04",
+                "cost_per_month": 10,
+                "status": "pending",
+                "size_gb": 100,
+                "DCID": 1,
+                "attached_to_SUBID": null,
+                "label": "files1"
+            },
+            {
+                "SUBID": 1313217,
+                "date_created": "2016-31-29 10:10:48",
+                "cost_per_month": 5,
+                "status": "active",
+                "size_gb": 50,
+                "DCID": 1,
+                "attached_to_SUBID": 1313207,
+                "label": "files2"
+            }
+        ]',
+
+        'block/create' => '{
+            "USERID": "564a1a88947b4",
+            "api_key": "AAAAAAAA"
+        }',
+
         'firewall/group_create' => '{
             "FIREWALLGROUPID": "1234abcd"
         }',

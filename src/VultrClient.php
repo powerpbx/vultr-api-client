@@ -17,6 +17,7 @@
 namespace Vultr;
 
 use Vultr\Adapter\AdapterInterface;
+use Vultr\ApiCall\BlockStorage;
 use Vultr\ApiCall\Dns;
 use Vultr\ApiCall\Firewall;
 use Vultr\ApiCall\MetaData;
@@ -50,6 +51,16 @@ class VultrClient
     public function dns()
     {
         return new Dns($this->adapter);
+    }
+
+    /**
+     * Provides block storage related calls.
+     *
+     * @return BlockStorage
+     */
+    public function blockStorage()
+    {
+        return new BlockStorage($this->adapter);
     }
 
     /**

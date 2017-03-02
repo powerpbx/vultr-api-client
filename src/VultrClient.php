@@ -43,6 +43,8 @@ class VultrClient
 
     /**
      * Provides dns related calls.
+     *
+     * @return DNS
      */
     public function dns()
     {
@@ -51,6 +53,8 @@ class VultrClient
 
     /**
      * Provides account and other related calls.
+     *
+     * @return MetaData
      */
     public function metaData()
     {
@@ -59,6 +63,8 @@ class VultrClient
 
     /**
      * Provides region related calls.
+     *
+     * @return Region
      */
     public function region()
     {
@@ -67,6 +73,8 @@ class VultrClient
 
     /**
      * Provides reservedip related calls.
+     *
+     * @return ReservedIp
      */
     public function reservedIp()
     {
@@ -75,6 +83,8 @@ class VultrClient
 
     /**
      * Provides server script related calls.
+     *
+     * @return Server
      */
     public function server()
     {
@@ -83,6 +93,8 @@ class VultrClient
 
     /**
      * Provides snapshot related calls.
+     *
+     * @return Snapshot
      */
     public function snapshot()
     {
@@ -91,6 +103,8 @@ class VultrClient
 
     /**
      * Provides SSH key related calls.
+     *
+     * @return SshKey
      */
     public function sshKey()
     {
@@ -99,6 +113,8 @@ class VultrClient
 
     /**
      * Provides startup script related calls.
+     *
+     * @return StartupScript
      */
     public function startupScript()
     {
@@ -107,6 +123,8 @@ class VultrClient
 
     /**
      * Provides user related calls.
+     *
+     * @return User
      */
     public function user()
     {

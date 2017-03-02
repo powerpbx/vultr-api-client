@@ -18,6 +18,7 @@ namespace Vultr;
 
 use Vultr\Adapter\AdapterInterface;
 use Vultr\ApiCall\Dns;
+use Vultr\ApiCall\Firewall;
 use Vultr\ApiCall\MetaData;
 use Vultr\ApiCall\Region;
 use Vultr\ApiCall\ReservedIp;
@@ -49,6 +50,16 @@ class VultrClient
     public function dns()
     {
         return new Dns($this->adapter);
+    }
+
+    /**
+     * Provides firewall related calls.
+     *
+     * @return Firewall
+     */
+    public function firewall()
+    {
+        return new Firewall($this->adapter);
     }
 
     /**

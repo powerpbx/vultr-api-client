@@ -720,7 +720,7 @@ class Server extends AbstractApiCall
      *                  backups will be enabled for this server (these have an
      *                  extra charge associated with them)
      *     APPID integer (optional) If launching an application (OSID 186), this
-     *           is the APPID to launch. See v1/app/list.
+     *           is the APPID to launch. See metaData()->getAppList().
      *     userdata string (optional) Base64 encoded cloud-init user-data
      *     notify_activate string (optional, default 'yes') 'yes' or 'no'. If
      *                     yes, an activation email will be sent when the server
@@ -731,6 +731,9 @@ class Server extends AbstractApiCall
      *     reserved_ip_v4 string (optional) IP address of the floating IP to use
      *                    as the main IP of this server
      *     hostname string (optional) The hostname to assign to this server.
+     *     tag string (optional) The tag to assign to this server.
+     *     FIREWALLGROUPID string (optional) The firewall group to assign to
+     *                            this server. See firewall()->getGroupList().
      *
      * @return mixed int|boolean Server ID if creation is successful, false
      * otherwise

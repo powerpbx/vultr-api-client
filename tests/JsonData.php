@@ -492,6 +492,45 @@ class JsonData
                 "windows": false
             }
         }',
+
+        'firewall/group_create' => '{
+            "FIREWALLGROUPID": "1234abcd"
+        }',
+
+        'firewall/group_list' => '{
+            "1234abcd": {
+                "FIREWALLGROUPID": "1234abcd",
+                "description": "my http firewall",
+                "date_created": "2017-02-14 17:48:40",
+                "date_modified": "2017-02-14 17:48:40",
+                "instance_count": 2,
+                "rule_count": 2,
+                "max_rule_count": 50
+            }
+        }',
+
+        'firewall/rule_create' => '{
+            "rulenumber": 2
+        }',
+
+        'firewall/rule_list' => '{
+            "1": {
+                "rulenumber": 1,
+                "action": "accept",
+                "protocol": "icmp",
+                "port": "",
+                "subnet": "",
+                "subnet_size": 0
+            },
+            "2": {
+                "rulenumber": 2,
+                "action": "accept",
+                "protocol": "tcp",
+                "port": "80",
+                "subnet": "10.234.22.0",
+                "subnet_size": 24
+            }
+        }',
     ];
 
     /**

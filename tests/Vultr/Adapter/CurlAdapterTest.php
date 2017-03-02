@@ -32,7 +32,7 @@ class CurlAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Invalid or missing API key. Check that your API key is present and matches your assigned key.', $result);
 
         // Prevent rate limit.
-        sleep(1);
+        sleep(2);
     }
 
     /**
@@ -46,7 +46,7 @@ class CurlAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Invalid or missing API key. Check that your API key is present and matches your assigned key.', $result);
 
         // Prevent rate limit.
-        sleep(1);
+        sleep(2);
     }
 
     /**
@@ -60,7 +60,7 @@ class CurlAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Invalid HTTP method. Check that the method (POST|GET) matches what the documentation indicates.', $result);
 
         // Prevent rate limit.
-        sleep(1);
+        sleep(2);
     }
 
     /**
@@ -74,6 +74,6 @@ class CurlAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Invalid API location. Check the URL that you are using.', $result);
 
         // Prevent rate limit.
-        sleep(1);
+        sleep(2);
     }
 }

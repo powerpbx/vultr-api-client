@@ -47,7 +47,7 @@ class JsonData
                 "price_per_month": "5.00",
                 "windows": false,
                 "plan_type": "SSD",
-                "available_location": [
+                "available_locations": [
                     1,
                     2,
                     3
@@ -63,7 +63,34 @@ class JsonData
                 "price_per_month": "8.00",
                 "windows": false,
                 "plan_type": "SATA",
-                "available_location": []
+                "available_locations": [],
+                "deprecated": true
+            }
+        }',
+
+        'plans/list_vc2' => '{
+            "1": {
+                "VPSPLANID": "1",
+                "name": "Starter",
+                "vcpu_count": "1",
+                "ram": "512",
+                "disk": "20",
+                "bandwidth": "1",
+                "price_per_month": "5.00",
+                "plan_type": "SSD"
+            }
+        }',
+
+        'plans/list_vdc2' => '{
+            "115": {
+                "VPSPLANID": "115",
+                "name": "8192 MB RAM,110 GB SSD,10.00 TB BW",
+                "vcpu_count": "2",
+                "ram": "8192",
+                "disk": "110",
+                "bandwidth": "10.00",
+                "price_per_month": "60.00",
+                "plan_type": "DEDICATED"
             }
         }',
 
@@ -479,6 +506,18 @@ class JsonData
                 if (isset($args['SUBID'])) {
                     $response = json_decode($this->response[$url], true);
                     $response = json_encode($response[$args['SUBID']]);
+                }
+                break;
+
+            case 'plans/list':
+                if (isset($args['type']) && $args['type'] != 'all') {
+                    $response = json_decode($this->response[$url], true);
+                    foreach ($response as $pos => $row) {
+                        if (strtolower($row['plan_type']) != $args['type']) {
+                            unset($response[$pos]);
+                        }
+                    }
+                    $response = json_encode($response);
                 }
                 break;
         }

@@ -16,6 +16,8 @@
 
 namespace Vultr\ApiCall;
 
+use Vultr\Exception\ApiException;
+
 class MetaData extends AbstractApiCall
 {
     /**
@@ -98,18 +100,77 @@ class MetaData extends AbstractApiCall
     /**
      * Retrieve a list of all active plans.
      *
-     * Plans that are no longer available will not be shown. The 'windows'
-     * field is no longer in use, and will always be false. Windows licenses
-     * will be automatically added to any plan as necessary. If your account
-     * has special plans available, you will need to pass your api_key in, in
-     * order to see them. For all other accounts, the API key is not optional.
+     * Plans that are no longer available will not be shown.
+     *
+     * The 'windows' field is no longer in use, and will always be false.
+     * Windows licenses will be automatically added to any plan as necessary.
+     *
+     * The "deprecated" field indicates that the plan will be going away in the
+     * future. New deployments of it will still be accepted, but you should
+     * begin to transition away from it's usage. Typically, deprecated plans are
+     * available for 30 days after they are deprecated.
+     *
+     * The sandbox ($2.50) plan is not available in the API.
      *
      * @see https://www.vultr.com/api/#plans_plan_list
      *
+     * @param string $type The type of plans to return. Possible values: "all",
+     * "vc2", "ssd", "vdc2", "dedicated".
+     *
      * @return mixed
      */
-    public function getPlansList()
+    public function getPlansList($type = 'all')
     {
-        return $this->adapter->get('plans/list');
+        $allowed = ['all', 'vc2', 'ssd', 'vdc2', 'dedicated'];
+
+        if (!in_array($type, $allowed)) {
+            throw new ApiException(
+                sprintf('Type must be one of %s.', implode(' or ', $allowed))
+            );
+        }
+
+        $args = ['type' => $type];
+
+        return $this->adapter->get('plans/list', $args);
+    }
+
+    /**
+     * Retrieve a list of all active vc2 plans.
+     *
+     * Plans that are no longer available will not be shown.
+     *
+     * The "deprecated" field indicates that the plan will be going away in the
+     * future. New deployments of it will still be accepted, but you should
+     * begin to transition away from it's usage. Typically, deprecated plans are
+     * available for 30 days after they are deprecated.
+     *
+     * The sandbox ($2.50) plan is not available in the API.
+     *
+     * @see https://www.vultr.com/api/#plans_plan_list_vc2
+     *
+     * @return mixed
+     */
+    public function getPlansListVc2()
+    {
+        return $this->adapter->get('plans/list_vc2');
+    }
+
+    /**
+     * Retrieve a list of all active vdc2 plans.
+     *
+     * Plans that are no longer available will not be shown.
+     *
+     * The "deprecated" field indicates that the plan will be going away in the
+     * future. New deployments of it will still be accepted, but you should
+     * begin to transition away from it's usage. Typically, deprecated plans are
+     * available for 30 days after they are deprecated.
+     *
+     * @see https://www.vultr.com/api/#plans_plan_list_vdc2
+     *
+     * @return mixed
+     */
+    public function getPlansListVdc2()
+    {
+        return $this->adapter->get('plans/list_vdc2');
     }
 }

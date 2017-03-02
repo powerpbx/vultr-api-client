@@ -74,4 +74,34 @@ class MetaDataTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('VPSPLANID', array_shift($result));
     }
+
+    public function testGetPlansListFilteredByType()
+    {
+        $result = $this->client->metaData()->getPlansList('ssd');
+
+        $this->assertArraySubset(['plan_type' => 'SSD'], array_shift($result));
+    }
+
+    /**
+     * @expectedException              \Vultr\Exception\ApiException
+     * @expectedExceptionMessageRegExp #Type must be one of .*\.#
+     */
+    public function testGetPlansListFilteredByTypeException()
+    {
+        $this->client->metaData()->getPlansList('test');
+    }
+
+    public function testGetPlansVc2List()
+    {
+        $result = $this->client->metaData()->getPlansListVc2();
+
+        $this->assertArrayHasKey('VPSPLANID', array_shift($result));
+    }
+
+    public function testGetPlansVdc2List()
+    {
+        $result = $this->client->metaData()->getPlansListVdc2();
+
+        $this->assertArrayHasKey('VPSPLANID', array_shift($result));
+    }
 }

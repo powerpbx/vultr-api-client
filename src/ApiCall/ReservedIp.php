@@ -123,14 +123,13 @@ class ReservedIp extends AbstractApiCall
      *
      * @see https://www.vultr.com/api/#reservedip_destroy
      *
-     * @param integer $reservedIpId Unique identifier for this reserved IP.
-     * These can be found using the getList() call.
+     * @param string $ip Reserved IP to remove from your account.
      *
      * @return integer HTTP response code
      */
-    public function destroy($reservedIpId)
+    public function destroy($ip)
     {
-        $args = ['SUBID' => $reservedIpId];
+        $args = ['ip_address' => $ip];
 
         return $this->adapter->post('reservedip/destroy', $args, true);
     }

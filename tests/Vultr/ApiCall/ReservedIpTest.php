@@ -65,7 +65,7 @@ class ReservedIpTest extends \PHPUnit_Framework_TestCase
 
     public function testDestroy()
     {
-        $result = $this->client->reservedIp()->destroy(1);
+        $result = $this->client->reservedIp()->destroy('127.0.0.1');
 
         $this->assertInternalType('int', $result);
     }

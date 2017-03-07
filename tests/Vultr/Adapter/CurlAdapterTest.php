@@ -2,9 +2,10 @@
 
 namespace Vultr\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Vultr\Adapter\CurlAdapter;
 
-class CurlAdapterTest extends \PHPUnit_Framework_TestCase
+class CurlAdapterTest extends TestCase
 {
     /**
      * @var CurlAdapter;

@@ -2,9 +2,10 @@
 
 namespace Vultr\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Vultr\Adapter\GuzzleHttpAdapter;
 
-class GuzzleHttpAdapterTest extends \PHPUnit_Framework_TestCase
+class GuzzleHttpAdapterTest extends TestCase
 {
     /**
      * @var GuzzleHttpAdapter;

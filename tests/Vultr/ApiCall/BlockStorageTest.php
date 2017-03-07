@@ -2,9 +2,10 @@
 
 namespace Vultr\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Vultr\VultrClient;
 
-class BlockStorageTest extends \PHPUnit_Framework_TestCase
+class BlockStorageTest extends TestCase
 {
     /**
      * @var VultrClient

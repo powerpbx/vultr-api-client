@@ -2,9 +2,10 @@
 
 namespace Vultr\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Vultr\VultrClient;
 
-class RegionTest extends \PHPUnit_Framework_TestCase
+class RegionTest extends TestCase
 {
     /**
      * @var VultrClient

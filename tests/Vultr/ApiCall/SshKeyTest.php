@@ -2,9 +2,10 @@
 
 namespace Vultr\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Vultr\VultrClient;
 
-class SshKeyTest extends \PHPUnit_Framework_TestCase
+class SshKeyTest extends TestCase
 {
     /**
      * @var VultrClient

@@ -2,9 +2,10 @@
 
 namespace Vultr\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Vultr\VultrClient;
 
-class ReservedIpTest extends \PHPUnit_Framework_TestCase
+class ReservedIpTest extends TestCase
 {
     /**
      * @var VultrClient

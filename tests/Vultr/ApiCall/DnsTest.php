@@ -2,9 +2,10 @@
 
 namespace Vultr\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Vultr\VultrClient;
 
-class DnsTest extends \PHPUnit_Framework_TestCase
+class DnsTest extends TestCase
 {
     /**
      * @var VultrClient

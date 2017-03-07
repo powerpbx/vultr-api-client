@@ -2,9 +2,10 @@
 
 namespace Vultr\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Vultr\VultrClient;
 
-class VultrClientTest extends \PHPUnit_Framework_TestCase
+class VultrClientTest extends TestCase
 {
     public function testConstruct()
     {

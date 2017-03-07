@@ -21,4 +21,4 @@ script:
   - php -S localhost:8000 -t tests/ &
   - vendor/bin/phpunit
   - sleep 5
-  - ADAPTER=GuzzleHttpAdapter phpunit
+  - ADAPTER=GuzzleHttpAdapter vendor/bin/phpunit

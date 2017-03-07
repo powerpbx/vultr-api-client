@@ -19,6 +19,6 @@ before_script:
 
 script:
   - php -S localhost:8000 -t tests/ &
-  - phpunit
+  - vendor/bin/phpunit
   - sleep 5
   - ADAPTER=GuzzleHttpAdapter phpunit

@@ -20,6 +20,7 @@ use Vultr\Adapter\AdapterInterface;
 use Vultr\ApiCall\BlockStorage;
 use Vultr\ApiCall\Dns;
 use Vultr\ApiCall\Firewall;
+use Vultr\ApiCall\Iso;
 use Vultr\ApiCall\MetaData;
 use Vultr\ApiCall\Region;
 use Vultr\ApiCall\ReservedIp;
@@ -71,6 +72,16 @@ class VultrClient
     public function firewall()
     {
         return new Firewall($this->adapter);
+    }
+
+    /**
+     * Provides ISO related calls.
+     *
+     * @return ISO
+     */
+    public function iso()
+    {
+        return new Iso($this->adapter);
     }
 
     /**

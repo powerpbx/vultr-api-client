@@ -55,13 +55,6 @@ class MetaDataTest extends TestCase
         $this->assertArrayHasKey('BACKUPID', array_shift($result));
     }
 
-    public function testGetIsoList()
-    {
-        $result = $this->client->metaData()->getIsoList();
-
-        $this->assertArrayHasKey('ISOID', array_shift($result));
-    }
-
     public function testGetOsList()
     {
         $result = $this->client->metaData()->getOsList();

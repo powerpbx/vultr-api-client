@@ -36,6 +36,10 @@ class JsonData
             }
         }',
 
+        'iso/create_from_url' => '{
+            "ISOID": 24
+        }',
+
         'plans/list' => '{
             "1": {
                 "VPSPLANID": "1",

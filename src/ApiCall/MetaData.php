@@ -72,18 +72,6 @@ class MetaData extends AbstractApiCall
     }
 
     /**
-     * List all ISOs currently available on this account.
-     *
-     * @see https://www.vultr.com/api/#iso_iso_list
-     *
-     * @return mixed Available ISO images
-     */
-    public function getIsoList()
-    {
-        return $this->adapter->get('iso/list');
-    }
-
-    /**
      * Retrieve a list of available operating systems.
      * If the 'windows' flag is true, a Windows license will be included with
      * the instance, which will increase the cost.

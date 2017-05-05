@@ -780,4 +780,27 @@ class Server extends AbstractApiCall
             return true;
         }
     }
+    
+    /**
+     * Set, change, or remove the firewall group currently applied to a server
+     *
+     * @see https://www.vultr.com/api/#server_firewall_group_set
+     *
+     * @param integer $serverId Unique identifier for this subscription. These
+     * can be found using the getList() call.
+     * @param string $firewallGroupId              The firewall group to apply
+     *               to this server. A value of "0" means "no firewall group".
+     *               See firewall->getGroupList().
+     *
+     * @return integer HTTP response code
+     */
+    public function setFirewallGroup($serverId, $firewallGroupId)
+    {
+        $args = [
+            'SUBID' => (int) $serverId,
+            'FIREWALLGROUPID' => $firewallGroupId
+        ];
+
+        return $this->adapter->post('server/firewall_group_set', $args, true);
+    }
 }

@@ -780,7 +780,7 @@ class Server extends AbstractApiCall
             return true;
         }
     }
-    
+
     /**
      * Set, change, or remove the firewall group currently applied to a server
      *

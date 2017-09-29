@@ -198,7 +198,7 @@ class Dns extends AbstractApiCall
      *
      * @return integer HTTP response code
      */
-    public function getDNSSECInfo($domain, $enable)
+    public function getDNSSECInfo($domain)
     {
         $args = [
             'domain' => $domain

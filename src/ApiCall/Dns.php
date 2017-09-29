@@ -204,7 +204,7 @@ class Dns extends AbstractApiCall
             'domain' => $domain
         ];
 
-        return $this->adapter->get('dns/dnssec_info', $args, true);
+        return $this->adapter->get('dns/dnssec_info', $args);
     }
 
     /**
@@ -250,6 +250,6 @@ class Dns extends AbstractApiCall
             'domain' => $domain
         ];
 
-        return $this->adapter->get('dns/soa_info', $args, true);
+        return $this->adapter->get('dns/soa_info', $args);
     }
 }

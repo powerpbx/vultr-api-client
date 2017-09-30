@@ -75,4 +75,32 @@ class DnsTest extends TestCase
 
         $this->assertInternalType('int', $result);
     }
+
+    public function testEnableDNSSEC()
+    {
+        $result = $this->client->dns()->enableDNSSEC('example.com', 'yes');
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testGetDNSSECInfo()
+    {
+        $result = $this->client->dns()->getDNSSECInfo('example.com');
+
+        $this->assertContains('example.com', $result[0]);
+    }
+
+    public function testUpdateSOA()
+    {
+        $result = $this->client->dns()->updateSOA('example.com', 'yes');
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testGetSOAInfo()
+    {
+        $result = $this->client->dns()->getSOAInfo('example.com');
+
+        $this->assertArrayHasKey('nsprimary', $result);
+    }
 }

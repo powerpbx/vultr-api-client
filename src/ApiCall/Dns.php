@@ -168,4 +168,88 @@ class Dns extends AbstractApiCall
 
         return $this->adapter->post('dns/delete_record', $args, true);
     }
+
+    /**
+     * Enable or disable DNSSEC for a domain
+     *
+     * @see https://www.vultr.com/api/#dns_dnssec_enable
+     *
+     * @param string $domain Domain name to enable or disable DNSSEC on
+     * @param string $enable 'yes' or 'no'.  If yes, DNSSEC will be enabled for the given domain
+     *
+     * @return integer HTTP response code
+     */
+    public function enableDNSSEC($domain, $enable)
+    {
+        $args = [
+            'domain' => $domain,
+            'enable' => $enable,
+        ];
+
+        return $this->adapter->post('dns/dnssec_enable', $args, true);
+    }
+
+    /**
+     * Get the DNSSEC keys (if enabled) for a domain
+     *
+     * @see https://www.vultr.com/api/#dns_dnssec_info
+     *
+     * @param string $domain Domain from which to gather DNSSEC keys
+     *
+     * @return integer HTTP response code
+     */
+    public function getDNSSECInfo($domain)
+    {
+        $args = [
+            'domain' => $domain
+        ];
+
+        return $this->adapter->get('dns/dnssec_info', $args);
+    }
+
+    /**
+     * Update the SOA record information for a domain
+     *
+     * @see https://www.vultr.com/api/#dns_soa_update
+     *
+     * @param string $domain Domain name to update SOA information for
+     * @param string $nsprimary (Optional) Primary nameserver to store in the SOA record
+     * @param string $email (Optional) Administrative email to store in the SOA record
+     *
+     * @return integer HTTP response code
+     */
+    public function updateSOA($domain, $nsprimary = null, $email = null)
+    {
+        $args = [
+            'domain' => $domain
+        ];
+
+        if ($nsprimary !== null) {
+            $args['nsprimary'] = $nsprimary;
+        }
+
+        if ($email !== null) {
+            $args['email'] = $email;
+        }
+
+        return $this->adapter->post('dns/soa_update', $args, true);
+    }
+
+    /**
+     * Get the SOA record information for a domain
+     *
+     * @see https://www.vultr.com/api/#dns_soa_info
+     *
+     * @param string $domain Domain from which to gather SOA information
+     *
+     * @return integer HTTP response code
+     */
+    public function getSOAInfo($domain)
+    {
+        $args = [
+            'domain' => $domain
+        ];
+
+        return $this->adapter->get('dns/soa_info', $args);
+    }
 }

@@ -196,7 +196,7 @@ class Dns extends AbstractApiCall
      *
      * @param string $domain Domain from which to gather DNSSEC keys
      *
-     * @return integer HTTP response code
+     * @return array
      */
     public function getDNSSECInfo($domain)
     {
@@ -242,7 +242,7 @@ class Dns extends AbstractApiCall
      *
      * @param string $domain Domain from which to gather SOA information
      *
-     * @return integer HTTP response code
+     * @return array
      */
     public function getSOAInfo($domain)
     {

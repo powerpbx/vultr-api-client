@@ -13,7 +13,7 @@ PHP API Client for api.vultr.com
 Open a shell, `cd` to your poject and type:
 
 ```sh
-composer require malc0mn/vultr-api-client dev-master
+composer require malc0mn/vultr-api-client
 ```
 
 or edit composer.json and add:

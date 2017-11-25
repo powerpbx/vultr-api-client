@@ -803,4 +803,113 @@ class Server extends AbstractApiCall
 
         return $this->adapter->post('server/firewall_group_set', $args, true);
     }
+    
+        /**
+     * Retrieve the current ISO state for a given subscription
+     *
+     * The  returned  state  may be one  of: ready | isomounting | isomounted.
+     * ISOID  will  only  be set when the mounted ISO exists in your library (
+     * see iso()->getList ). Otherwise, it will read "0".
+     *
+     * @see https://www.vultr.com/api/#server_iso_status
+     *
+     * @param integer $serverId Unique identifier for this subscription. These
+     * can be found using the getList() call.
+     *
+     * @return integer HTTP response code
+     */
+    public function getIsoStatus($serverId)
+    {
+        $args = [
+            'SUBID' => (int) $serverId,
+        ];
+
+        return $this->adapter->get('server/iso_status', $args, true);
+    }
+    
+    /**
+     * Detach the currently mounted ISO and reboot the server.
+     *
+     * @see https://www.vultr.com/api/#server_iso_detach
+     *
+     * @param integer $serverId Unique identifier for this subscription. These
+     * can be found using the getList() call.
+     *
+     * @return integer HTTP response code
+     */
+    public function setIsoDetach($serverId)
+    {
+        $args = [
+            'SUBID' => (int) $serverId,
+        ];
+
+        return $this->adapter->post('server/iso_detach', $args, true);
+    }    
+
+    /**
+     * Attach an ISO and reboot the server.
+     *
+     * @see https://www.vultr.com/api/#server_iso_attach
+     *
+     * @param integer $serverId Unique identifier for this subscription. These
+     * can be found using the getList() call.
+     * @param integer $isoId             The ISO that will be mounted. See the
+     * iso()->getList() call.
+     *
+     * @return integer HTTP response code
+     */
+    public function setIsoAttach($serverId, $isoId)
+    {
+        $args = [
+            'SUBID' => (int) $serverId,
+            'ISOID' => (int) $isoId,
+        ];
+
+        return $this->adapter->post('server/iso_attach', $args, true);
+    }    
+
+    /**
+     * Retrieves the backup schedule for a server. All time values are in UTC.
+     *
+     * @see https://www.vultr.com/api/#server_backup_get_schedule
+     *
+     * @param integer $serverId Unique identifier for this subscription. These
+     * can be found using the getList() call.
+     *
+     * @return integer HTTP response code
+     */
+    public function getBackupSchedule($serverId)
+    {
+        $args = [
+            'SUBID' => (int) $serverId,
+        ];
+
+        return $this->adapter->post('server/backup_get_schedule', $args,
+        false);
+    }    
+
+    /**
+     * Sets the backup schedule for a server. All time values are in UTC.
+     *
+     * @see https://www.vultr.com/api/#server_backup_get_schedule
+     *
+     * @param array $config with the following keys:
+     *     SUBID integer Unique identifier for this subscription. These can be
+     *                   found using the getList() call.
+     *     cron_type string Backup cron type. Can be one of 'daily', 'weekly',
+     *                      or 'monthly'.
+     *     hour integer (optional) Hour value (0-23). Applicable to crons:
+     *                             'daily', 'weekly', 'monthly'.
+     *     dow integer (optional) Day-of-week value (0-6). Applicable to
+     *                            crons: 'weekly'.
+     *     dom integer (optional) Day-of-month value (1-28). Applicable to
+     *                            crons: 'monthly'.
+     *
+     * @return integer HTTP response code
+     */
+    public function setBackupSchedule($config)
+    {
+        return $this->adapter->post('server/backup_set_schedule', $config, true);
+    }
+    
 }

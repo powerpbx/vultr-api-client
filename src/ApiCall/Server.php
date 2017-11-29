@@ -803,7 +803,7 @@ class Server extends AbstractApiCall
 
         return $this->adapter->post('server/firewall_group_set', $args, true);
     }
-    
+
         /**
      * Retrieve the current ISO state for a given subscription
      *
@@ -826,7 +826,7 @@ class Server extends AbstractApiCall
 
         return $this->adapter->get('server/iso_status', $args, true);
     }
-    
+
     /**
      * Detach the currently mounted ISO and reboot the server.
      *
@@ -844,7 +844,7 @@ class Server extends AbstractApiCall
         ];
 
         return $this->adapter->post('server/iso_detach', $args, true);
-    }    
+    }
 
     /**
      * Attach an ISO and reboot the server.
@@ -866,7 +866,7 @@ class Server extends AbstractApiCall
         ];
 
         return $this->adapter->post('server/iso_attach', $args, true);
-    }    
+    }
 
     /**
      * Retrieves the backup schedule for a server. All time values are in UTC.
@@ -886,7 +886,7 @@ class Server extends AbstractApiCall
 
         return $this->adapter->post('server/backup_get_schedule', $args,
         false);
-    }    
+    }
 
     /**
      * Sets the backup schedule for a server. All time values are in UTC.
@@ -911,5 +911,35 @@ class Server extends AbstractApiCall
     {
         return $this->adapter->post('server/backup_set_schedule', $config, true);
     }
-    
+
+    /**
+     * Enables automatic backups on a server.
+     *
+     * @see https://www.vultr.com/api/#server_backup_enable
+     *
+     * @param integer $serverId Unique identifier for this subscription. These
+     * can be found using the getList() call.
+     *
+     * @return integer HTTP response code
+     */
+    public function enableBackup($serverId)
+    {
+        return $this->adapter->post('server/backup_enable', $serverId, true);
+    }
+
+    /**
+     * Disables automatic backups on a server.
+     *
+     * @see https://www.vultr.com/api/#server_backup_disable
+     *
+     * @param integer $serverId Unique identifier for this subscription. These
+     * can be found using the getList() call.
+     *
+     * @return integer HTTP response code
+     */
+    public function disableBackup($serverId)
+    {
+        return $this->adapter->post('server/backup_disable', $serverId, true);
+    }
+
 }

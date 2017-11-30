@@ -924,7 +924,11 @@ class Server extends AbstractApiCall
      */
     public function enableBackup($serverId)
     {
-        return $this->adapter->post('server/backup_enable', $serverId, true);
+        $args = [
+            'SUBID' => (int) $serverId,
+        ];
+
+        return $this->adapter->post('server/backup_enable', $args, true);
     }
 
     /**
@@ -939,7 +943,11 @@ class Server extends AbstractApiCall
      */
     public function disableBackup($serverId)
     {
-        return $this->adapter->post('server/backup_disable', $serverId, true);
+        $args = [
+            'SUBID' => (int) $serverId,
+        ];
+
+        return $this->adapter->post('server/backup_disable', $args, true);
     }
 
 }

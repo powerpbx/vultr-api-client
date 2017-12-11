@@ -892,9 +892,9 @@ class Server extends AbstractApiCall
      *
      * @see https://www.vultr.com/api/#server_backup_get_schedule
      *
+     * @param integer $serverId Unique identifier for this subscription. These
+     * can be found using the getList() call.
      * @param array $config with the following keys:
-     *     SUBID integer Unique identifier for this subscription. These can be
-     *                   found using the getList() call.
      *     cron_type string Backup cron type. Can be one of 'daily', 'weekly',
      *                      or 'monthly'.
      *     hour integer (optional) Hour value (0-23). Applicable to crons:
@@ -906,8 +906,12 @@ class Server extends AbstractApiCall
      *
      * @return integer HTTP response code
      */
-    public function setBackupSchedule($config)
+    public function setBackupSchedule($serverId, array $config)
     {
+        // First array is indeed $config so any SUBID present will be
+        // overwritten with the $serverId parameter.
+        $config = array_merge($config, ['SUBID' => $serverId]);
+
         return $this->adapter->post('server/backup_set_schedule', $config, true);
     }
 

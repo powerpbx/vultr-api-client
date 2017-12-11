@@ -804,7 +804,7 @@ class Server extends AbstractApiCall
         return $this->adapter->post('server/firewall_group_set', $args, true);
     }
 
-        /**
+    /**
      * Retrieve the current ISO state for a given subscription
      *
      * The  returned  state  may be one  of: ready | isomounting | isomounted.
@@ -949,5 +949,4 @@ class Server extends AbstractApiCall
 
         return $this->adapter->post('server/backup_disable', $args, true);
     }
-
 }

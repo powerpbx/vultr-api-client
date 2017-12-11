@@ -816,7 +816,7 @@ class Server extends AbstractApiCall
      * @param integer $serverId Unique identifier for this subscription. These
      * can be found using the getList() call.
      *
-     * @return integer HTTP response code
+     * @return array
      */
     public function getIsoStatus($serverId)
     {
@@ -824,7 +824,7 @@ class Server extends AbstractApiCall
             'SUBID' => (int) $serverId,
         ];
 
-        return $this->adapter->get('server/iso_status', $args, true);
+        return $this->adapter->get('server/iso_status', $args);
     }
 
     /**
@@ -876,7 +876,7 @@ class Server extends AbstractApiCall
      * @param integer $serverId Unique identifier for this subscription. These
      * can be found using the getList() call.
      *
-     * @return integer HTTP response code
+     * @return array
      */
     public function getBackupSchedule($serverId)
     {
@@ -884,8 +884,7 @@ class Server extends AbstractApiCall
             'SUBID' => (int) $serverId,
         ];
 
-        return $this->adapter->post('server/backup_get_schedule', $args,
-        false);
+        return $this->adapter->post('server/backup_get_schedule', $args, false);
     }
 
     /**

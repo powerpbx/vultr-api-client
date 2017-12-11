@@ -274,4 +274,60 @@ class ServerTest extends TestCase
             'OSID' => 148,
         ]);
     }
+
+    public function testGetIsoStatus()
+    {
+        $result = $this->client->server()->getIsoStatus(576965);
+
+        $this->assertArrayHasKey('state', $result);
+    }
+
+    public function testSetIsoDetach()
+    {
+        $result = $this->client->server()->setIsoDetach(576965);
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testSetIsoAttach()
+    {
+        $result = $this->client->server()->setIsoAttach(576965, 24);
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testGetBackupSchedule()
+    {
+        $result = $this->client->server()->getBackupSchedule(576965);
+
+        $this->assertArrayHasKey('next_scheduled_time_utc', $result);
+    }
+
+    public function testSetBackupSchedule()
+    {
+        $result = $this->client->server()->setBackupSchedule(
+            576965,
+            [
+                'cron_type' => 'weekly',
+                'hour' => 8,
+                'dow' => 6,
+            ]
+        );
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testEnableBackup()
+    {
+        $result = $this->client->server()->enableBackup(576965);
+
+        $this->assertInternalType('int', $result);
+    }
+
+    public function testDisableBackup()
+    {
+        $result = $this->client->server()->disableBackup(576965);
+
+        $this->assertInternalType('int', $result);
+    }
 }

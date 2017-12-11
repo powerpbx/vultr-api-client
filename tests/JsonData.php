@@ -438,6 +438,20 @@ class JsonData
             }
         }',
 
+        'server/iso_status' => '{
+            "state": "ready",
+            "ISOID": "0"
+        }',
+
+        'server/backup_get_schedule' => '{
+            "enabled": true,
+            "cron_type": "weekly",
+            "next_scheduled_time_utc": "2016-05-07 08:00:00",
+            "hour": 8,
+            "dow": 6,
+            "dom": 0
+        }',
+
         'reservedip/list' => '{
             "1313044": {
                 "SUBID": 1313044,

@@ -66,9 +66,18 @@ class MetaData extends AbstractApiCall
      *
      * @return mixed
      */
-    public function getBackupList()
+    public function getBackupList($serverId=null, $backupId=null)
     {
-       return $this->adapter->get('backup/list');
+        if ($serverId !== null) {
+            $args['SUBID'] = (int) $serverId;   
+        }
+        if ($backupId !== null) {
+            $args['BACKUPID'] = $backupId;
+        }
+        if ($args) {
+            return $this->adapter->post('backup/list', $args);
+        }
+        return $this->adapter->get('backup/list');
     }
 
     /**

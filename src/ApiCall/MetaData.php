@@ -78,7 +78,7 @@ class MetaData extends AbstractApiCall
             $args['BACKUPID'] = $backupId;
         }
         if ($args) {
-            return $this->adapter->post('backup/list', $args);
+            return $this->adapter->get('backup/list', $args);
         }
         return $this->adapter->get('backup/list');
     }

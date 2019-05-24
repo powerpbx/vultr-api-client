@@ -64,6 +64,9 @@ class MetaData extends AbstractApiCall
      *
      * @see https://www.vultr.com/api/#backup_backup_list
      *
+     * @param integer $serverId (optional) Filter result set to only contain backups of this subscription object.
+     * @param string  $backupId (optional) Filter result set to only contain this backup.
+     *
      * @return mixed
      */
     public function getBackupList($serverId=null, $backupId=null)

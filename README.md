@@ -13,7 +13,7 @@ PHP API Client for api.vultr.com
 Open a shell, `cd` to your poject and type:
 
 ```sh
-composer require malc0mn/vultr-api-client
+composer require powerpbx/vultr-api-client
 ```
 
 or edit composer.json and add:
@@ -21,7 +21,7 @@ or edit composer.json and add:
 ```json
 {
     "require": {
-        "malc0mn/vultr-api-client": "~1.0"
+        "powerpbx/vultr-api-client": "~1.0"
     }
 }
 ```

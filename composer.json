@@ -1,9 +1,9 @@
 {
-    "name": "malc0mn/vultr-api-client",
+    "name": "powerpbx/vultr-api-client",
     "description": "PHP API client for api.vultr.com",
     "type": "library",
     "license": "MIT",
-    "homepage": "https://github.com/malc0mn/vultr-api-client",
+    "homepage": "https://github.com/powerpbx/vultr-api-client",
     "authors": [
         {
             "name": "Zach aka usefulz",
